@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/biquge.css" />
+		<script type="text/javascript" src="js/jquery-1.10.1.js" ></script>
+		<script type="text/javascript" src="js/push.js" ></script>
+		<script type="text/javascript" src="js/bqg.js" ></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/qs.js" ></script>
+		<script type="text/javascript" src="js/axios.js" ></script>
+		
+		<style type="text/css">
+			.show{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="ywtop">
+				<div class="ywtop_con">
+					<div class="nri">
+						<form name="frmlogin" id="frmlogin" method="post" class="show" >
+							<div class="ccc"v-if="user==null">
+								<div class="txtt" >
+									<a href="login.html">登录</a>
+								</div>
+								<div class="txtt"><a href="register.html">用户注册</a></div>
+							</div>
+						</form>
+						<div v-if="user!=null ">
+							Hi,&nbsp;&nbsp;{{user.uname}}&nbsp;&nbsp;
+							<a href="center.html" target="_top">个人中心</a>
+							|
+							<a  @click="outLogin()">退出登录</a>
+							&nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="header">
+				<div class="header_logo">
+					<a href="index.html" style="background-image: url(images/logo.png);">阅览阁</a>
+				</div>
+				<div class="header_search">
+					<form action="searchResult.html" name="form" id="sform">
+							<input type="text" placeholder="可搜书名和作者，请您少字也别输错字。" name="key" class="search" id="wd" baidusug="2" autocomplete="off">
+							<button id="sss"  > 搜 索 </button>
+					</form>
+				</div>
+				<div class="userpanel">
+					&nbsp;
+					<font color="red">留言: </font>
+					<a rel="nofollow" href="feedBack.html?title=求书加书">
+						<font color="red">求书加书</font>
+					</a>
+					,
+					<a rel="nofollow" @click="goFeedBack">意见反馈</a>
+					&nbsp;
+					<a rel="nofollow" href="ClientServerCenter.html">联系我们</a>
+					&nbsp;
+					&nbsp;
+					<a rel="nofollow" href="feedBack.html?title=书籍反馈">书籍反馈</a>
+				</div>
+			</div>
+			<div class="nav">
+				<ul>
+					<li><a href="index.html">首页</a></li>
+					<li><a href="bookshelf.html">我的书架</a></li>
+					<li><a href="type.html?type=玄幻">玄幻小说</a></li>
+					<li><a href="type.html?type=修真">修真小说</a></li>
+					<li><a href="type.html?type=都市">都市小说</a></li>
+					<li><a href="type.html?type=穿越">穿越小说</a></li>
+					<li><a href="type.html?type=网游">网游小说</a></li>
+					<li><a href="type.html?type=科幻">科幻小说</a></li>
+					<li><a href="rank.html">排行榜单</a></li>
+				</ul>
+			</div>
+			<div class="dahengfu" style="margin-bottom:0;"></div>
+			<div id="__main" class="main">
+				<div id="hotcontent">
+					<div class="l" style="margin-left: 270px;">
+						<div class="item" v-for="h in main ">
+							<div class="image">
+								<a :href="'book.html?bid='+h.bid"><img :src="h.img" :alt="h.bname" width="120" height="150"></a>
+							</div>
+							<dl>
+					           <dt>
+					           		<span>{{h.authName}}</span>
+					           		<a :href="'book.html?bid='+h.bid">{{h.bname}}</a>
+					           </dt>
+					           <dd>  
+					           {{h.intro}}  
+					           </dd>
+					        </dl>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="r" style="margin-right: 270px;">
+						<h2>公告牌</h2>
+						<ul >
+         					<li v-for="i in informations" >
+         						<span class="s1">[{{i.iType}}]</span>
+         						<span class="s2">
+         							<a  target="_blank" rel="nofollow">{{i.iAdvice}}</a>
+         						</span>
+         					</li>
+         					<li v-if=" informations == null || informations.length==0" >
+         						<span class="s1">[公告]</span>
+         						<span class="s2">
+         							<a  target="_blank" rel="nofollow">暂无任何公告</a>
+         						</span>
+         					</li>    
+    					</ul>
+    					<h2>上期强推</h2>
+    					<ul>
+             				<li v-for="h in hot">
+             					<span class="s1">[{{h.btype}}]</span>
+             					<span class="s2"><a :href="'book.html?bid='+h.bid">{{h.bname}}</a></span>
+             					<span class="s5">{{h.authName}}</span>
+             				</li> 
+    					</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="dahengfu"></div>
+				<div class="novelslist" v-for="j in 2 ">
+					<div class="content"  >
+						<h2>{{types[j*1-1][0].btype}}小说</h2>
+					  	<div class="top">
+							<div class="image"><img :src="types[j*1-1][0].img" alt="沧元图" width="67" height="82"></div>
+							<dl>
+								<dt>
+									<a :href="'book.html?bid='+types[j*1-1][0].bid">{{types[j*1-1][0].bname}}</a>
+								</dt>
+								<dd>    {{types[j*1-1][0].intro}}</dd>
+							</dl>
+							<div class="clear"></div>
+					  	</div>
+						<ul>
+							<li v-for="i in 12"><a :href="'book.html?bid='+types[j*1-1][i].bid">{{types[j*1-1][i].bname}}</a>/{{types[j*1-1][i].authName}}</li>
+							
+						</ul>
+					</div>
+					<div class="content"  >
+						<h2>{{types[j*2-1][0].btype}}小说</h2>
+					  	<div class="top">
+							<div class="image"><img :src="types[j*2-1][0].img" alt="沧元图" width="67" height="82"></div>
+							<dl>
+								<dt>
+									<a :href="'book.html?bid='+types[j*2-2][0].bid">{{types[j*2-1][0].bname}}</a>
+								</dt>
+								<dd>    {{types[j*2-1][0].intro}}</dd>
+							</dl>
+							<div class="clear"></div>
+					  	</div>
+						<ul>
+							<li v-for="i in 12"><a :href="'book.html?bid='+types[j*2-2][i].bid">{{types[j*2-1][i].bname}}</a>/{{types[j*2-1][i].authName}}</li>
+							
+						</ul>
+					</div>
+					<div class="content border">
+						<h2>{{types[j*3-1][0].btype}}小说</h2>
+					  	<div class="top">
+							<div class="image"><img :src="types[j*3-1][0].img" alt="沧元图" width="67" height="82"></div>
+							<dl>
+								<dt>
+									<a :href="'book.html?bid='+types[j*3-1][0].bid">{{types[j*3-1][0].bname}}</a>
+								</dt>
+								<dd>    {{types[j*3-1][0].intro}}</dd>
+							</dl>
+							<div class="clear"></div>
+					  	</div>
+						<ul>
+							<li v-for="i in 12"><a :href="'book.html?bid='+types[j*3-1][i].bid">{{types[j*3-1][i].bname}}</a>/{{types[j*3-1][i].authName}}</li>
+							
+						</ul>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div id="newscontent">
+					<div class="l" style="margin-left: 270px;">
+						<h2>最近更新小说列表</h2>
+						<ul>
+							
+							<li v-for="r in left ">
+								<span class="s1">[{{r.btype}}]</span>
+								<span class="s2">
+									<a :href="'book.html?bid='+r.bid" target="_blank">{{r.bname}}</a>
+								</span>
+								<span class="s3">
+									<a :href="'content.html?bid='+r.bid+'&sno='+r.sno" target="_blank">{{r.sname}}</a>
+								</span>
+								<span class="s4">{{r.authName}}</span>
+							</li>
+							
+						 </ul>
+					</div>
+					<div class="r" style="margin-right: 270px;">
+						<h2>最新入库小说</h2>
+						<ul>
+							<li v-for="l in right ">
+								<span class="s1">[{{l.btype}}]</span>
+								<span class="s2">
+									<a :href="'book.html?bid='+l.bid">{{l.bname}}</a>
+								</span>
+								<span class="s5">{{l.authName}}</span>
+							</li>
+							
+						</ul>
+						
+					</div>	
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<div id="firendlink">
+			友情连接：<a href="http://www.xbiquge.la/" target="_blank">新笔趣阁</a>
+			<a href="http://www.xbiquge.la/2/2210/" target="_blank">全职法师</a>
+			<a href="http://www.xbiquge.la/1/1089/" target="_blank">妖魔战神</a>
+			<a href="http://www.xbiquge.la/0/69/" target="_blank">帝霸</a>
+			
+			<a href="http://www.xbiquge.la/1/1064/" target="_blank">原始战记</a>
+			<a href="http://www.xbiquge.la/3/3844/" target="_blank">御天神帝</a>
+			
+			<a href="http://www.douluo123.com" target="_blank">斗罗大陆3龙王传说
+			</a>
+			<a href="http://www.bxwu.net" target="_blank">免费小说</a>
+			<a href="http://www.bage01.com/" target="_blank">八哥电影网</a>
+			<a href="http://www.abcsee.net" target="_blank">北辰文学网</a>
+			<a href="http://biqugedd.com/" target="_blank">寒门崛起</a>
+			<a href="http://www.hebaoge.com/" target="_blank"> 荷包网</a>
+			<a href="http://www.bxwu.net/" target="_blank"> 免费小说
+			</a>
+			<a href="http://www.zgls5000.net" target="_blank"> 中国历史网
+			</a>
+			<a href="http://www.txt456.cc" target="_blank">TXT小说下载</a>
+			<a href="http://www.lasmr.com" target="_blank">男人小说</a>
+			<a href="http://www.fuhao56.com" target="_blank">大富豪影院</a>
+			<a href="http://www.xinquanji.com" target="_blank">全集网</a>
+			<a href="http://www.52kaoyan.cn" target="_blank">考研资料下载</a>
+			<a href="http://www.jinguatv.com" target="_blank">金瓜影视</a>
+			<a href="http://www.jilupianzhijia.com" target="_blank">纪录片之家</a>
+			<a href="http://care.qm120.com" target="_blank">全民保健网</a>
+			<a href="http://sobo.me" target="_blank">神马电影</a>
+			<a href="http://www.xj917.com" target="_blank">新疆综合网</a>
+			<a href="http://85duc.alihuahua.com" target="_blank">85度C</a>
+			<a href="http://tecenet.com" target="_blank">医疗器械</a>
+			<a href="http://www.5200wx.com" target="_blank">我爱小说</a>
+			<a href="http://www.iface.com.cn" target="_blank">爱容网</a>
+			<a href="http://www.meiwen1314.com" target="_blank">星辰美文网</a>
+			<a href="http://liuliushe.com" target="_blank">福利视频</a>
+			<a href="http://www.zanxsq.com" target="_blank">真爱社区</a>
+			<a href="http://www.tenchong.com" target="_blank">高清视频会议系统</a>
+			<a href="http://wuluhe.com" target="_blank">翡翠</a>
+			<a href="http://www.315fangwei.com" target="_blank">防伪查询</a>
+			<a href="http://www.xs91.net/" target="_blank">约稿网</a>
+			<a href="http://www.zunvyou.cn/" target="_blank">租女友</a>
+			<a href="http://www.44pq.com" target="_blank">永生小说网</a>
+			<a href="http://www.fylunwen.com" target="_blank">代写毕业论文</a>
+			<a href="http://www.yy0608.com" target="_blank">yy4480</a>
+			<a href="http://www.ttmj.cc" target="_blank">美剧天堂</a>
+			<a href="http://www.4008808840.com" target="_blank">股票配资</a>
+			<a href="http://92kshu.com" target="_blank">就爱看书网</a>
+			<a href="http://www.xzdlq.com" target="_blank">传奇万能登陆器</a>
+			<a href="http://www.neihan.net" target="_blank">内涵图</a>
+			<a href="http://www.aqiwen.com" target="_blank">爱奇闻</a>
+			<a href="http://www.315fangwei.com" target="_blank">防伪标签制作</a>
+			<a href="http://dashi.aipai.com" target="_blank">视频剪辑</a>
+			<a href="http://www.zhuangjiyuan.com" target="_blank">系统</a>
+			<a href="http://www.pgygho.com" target="_blank">ghost win7</a>
+			<a href="http://www.jsgho.net" target="_blank">电脑技术</a>
+			<a href="http://www.smdyy.cc" target="_blank">神马电影网</a>(邮箱见顶端)</div>
+		<div class="dahengfu"></div>
+		<div class="footer"> 
+		    <div class="footer_link"></div>
+		    <div class="footer_cont">
+				<p>Copyright © 2015-2022 <a href="http://www.xbiquge.la/">新笔趣阁</a> All Rights Reserved.</p>
+				<p>沪ICP备14048333号</p>
+			  </div>
+		</div>
+		</div>
+		<script type="text/javascript">
+		var vm=new Vue({
+			el:'#wrapper',
+			data:{
+				main:{},
+				types:{},
+				right:{},
+				left:{},
+				informations:{},
+				user:{},
+				hot:{},
+
+			},
+			methods:{
+				outLogin:function(){
+
+					axios({
+						url:'user/OutLogin',
+						method:'post',
+						params:{}
+					}).then(result=>{
+						console.log(result.data);
+
+						if(result.data.code==1){
+							location.reload();	
+						}else{
+							alert('用户登录失败');
+						}
+					});
+				},
+				goFeedBack:function(){
+					if(this.user==null){
+						alert("请登陆...");
+						window.location.href="login.html";
+					}else {
+						window.location.href="feedBack.html?title=意见反馈";
+					}
+				},
+				searchBook:function(){
+					console.log($("#wd").val);
+					//if ()
+					//location.href="searchResult.html&key="+this.searchKey;
+				}
+			},
+			mounted:function(){
+				axios.all([findInfo(),CheckLogin()])
+				.then(axios.spread((fn1,fn2)=>{
+					this.data=fn1.data;
+					this.left=fn1.data.obj.left;
+					this.main=fn1.data.obj.main;
+					this.right=fn1.data.obj.right;
+					this.types=fn1.data.obj.types[0];
+					this.informations=fn1.data.obj.informations;
+					this.user=fn2.data.obj;
+					this.hot=fn1.data.obj.hot;
+					console.log(this.left)
+					console.log(this.hot)
+				}));
+			}
+			
+		});
+		function findInfo(){
+			return axios.get('bookinfo/findIndex');
+		
+		}
+		function CheckLogin(){
+			return axios({
+				url:'user/checkLogin',
+				method:'get',
+				params:{}
+			});
+		}
+		</script>
+	</body>
+</html>

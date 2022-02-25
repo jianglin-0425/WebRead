@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>【笔趣阁】——后台管理系统</title>
+        <meta content="Admin Dashboard" name="description" />
+        <meta content="Mannatthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+
+    </head>
+
+
+    <body class="fixed-left">
+		<div id="changePwd">
+        <!-- Loader -->
+        <div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="left side-menu">
+                <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+                    <i class="ion-close"></i>
+                </button>
+
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> Weread</a>
+                        <!-- <a href="index.html" class="logo"><img src="../assets/images/logo.png" height="24" alt="logo"></a> -->
+                    </div>
+                </div>
+
+                <div class="sidebar-inner slimscrollleft">
+
+                    <div id="sidebar-menu">
+                        <ul>
+
+                            <li>
+                                <a href="index.html" class="waves-effect"><i class="mdi mdi-airplay"></i><span> 首页</span></a>
+                            </li>
+                            <li>
+                                <a href="userManage.html" class="waves-effect"><i class="mdi mdi-swap-horizontal"></i><span> 用户管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="bookManage.html" class="waves-effect"><i class="mdi mdi-wallet"></i><span> 书籍管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="news.html" class="waves-effect"><i class="mdi mdi-chart-areaspline"></i><span>反馈信息 </span></a>
+                            </li>                           
+                            <li>
+                                <a href="checkVisit.html" class="waves-effect"><i class="mdi mdi-settings"></i><span> 阅读统计 </span></a>
+                            </li>
+                            <li>
+                                <a href="changePwd.html" class="waves-effect"><i class="mdi mdi-power"></i><span> 修改密码 </span></a>
+                            </li>
+                            <li>
+                                <a href="logout.html" class="waves-effect"><i class="mdi mdi-power"></i><span> 退出 </span></a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div> <!-- end sidebarinner -->
+            </div>
+            <!-- Left Sidebar End -->
+
+            <!-- Start right Content here -->
+
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+
+                    <!-- Top Bar Start -->
+                    <div class="topbar">
+
+                        <nav class="navbar-custom">
+
+                            <ul class="list-inline float-right mb-0">
+                                
+                                <li class="list-inline-item dropdown 通知-list">
+                                    <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
+                                       aria-haspopup="false" aria-expanded="false">
+                                        <img src="../assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right 个人资料-dropdown ">
+                                        <!-- item-->
+                                        <div class="dropdown-item noti-title">
+                                            <h5>欢迎</h5>
+                                        </div>
+                                        <a class="dropdown-item" href="index.html"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> 个人资料</a>
+                                        <a class="dropdown-item" href="bookManage.html"><i class="mdi mdi-wallet m-r-5 text-muted"></i> 书籍管理</a>
+                                        <a class="dropdown-item" href="news.html"><span class="badge badge-success float-right"></span><i class="mdi mdi-settings m-r-5 text-muted"></i> 反馈信息</a>
+                                       
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="logout.html"><i class="mdi mdi-登出 m-r-5 text-muted"></i> 登出</a>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                            <ul class="list-inline menu-left mb-0">
+                                <li class="float-left">
+                                    <button class="button-menu-mobile open-left waves-light waves-effect">
+                                        <i class="mdi mdi-menu"></i>
+                                    </button>
+                                </li>
+                                
+                            </ul>
+
+                            <div class="clearfix"></div>
+
+                        </nav>
+
+                    </div>
+                    <!-- Top Bar End -->
+
+                    <div class="page-content-wrapper ">
+
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="page-title-box">
+                                        <div class="btn-group float-right">
+                                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                                <li class="breadcrumb-item"><a href="index.html">首页</a></li>
+                                                <li class="breadcrumb-item active">修改信息</li>
+                                            </ol>
+                                        </div>
+                                        <h4 class="page-title">修改信息</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end page title end breadcrumb -->
+                            <div class="row">
+                                
+                            </div>
+                            <div class="row" style="height: 345px;">
+                                <div class="col-md-4 col-xl-3">
+                                    <div class="card m-b-30">
+                                        <div class="card-body" style="height: 337px;">                                           
+                                            <div class=" text-center" style="margin-top: 58px;">                        
+                                                <img src="../assets/images/users/avatar-1.jpg" alt="" class="rounded-circle img-thumbnail w-50">
+                                                <h4 class="font-16">管理员</h4>
+                                                <input type="file" class="btn btn-primary btn-sm mt-3" size="20" multiple="multiple" onchange="setImagePreviews(this,'showPics')" style="width: 90px; margin-bottom: 0px; margin-left: -22px;"/>
+                                                <a href="#" class="btn btn-primary btn-sm mt-3" style="margin-left: -85px;">上传头像</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-xl-4">
+                                    <div class="card bg-white m-b-30">
+                                        <div class="card-body">
+                                            <div class="general-label">
+                                                <form role="form">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">用户名</label>
+                                                        <input type="text" class="form-control" id="exampleInputName1" placeholder="请输入您的新用户名" v-model="vName">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">修改密码</label>
+                                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请确认您的新密码"  v-model="vPwd">  
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">个性签名</label>
+                                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="请输入您的个性签名"  v-model="Introduce">
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-sm mt-3" @click="update">保存修改</button>
+                                                </form>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-xl-5">
+                                    <div class="card bg-white m-b-30">
+                                        <div class="card-body">
+                                            <div class="general-label">
+                                                <form role="form">
+                                                   <div class="card m-b-30">
+				                                        <img class="card-img-top img-fluid" src="../assets/images/news/6.jpg" alt="Card image cap">
+				                                    </div>
+                                                   
+                                                </form>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- container -->
+ 						<div class="row">
+                            <div class="col-md-12 col-xl-12">
+                                <div class="card bg-white m-b-20">
+                                    <div class="card-body">
+                                        <div class="general-label">
+                                            <form role="form">
+                                               <div class="card m-b-20">
+			                                        <img class="card-img-top img-fluid" src="../assets/images/news/7.jpg" alt="Card image cap">
+			                                    </div>
+                                               
+                                            </form>                                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- Page content Wrapper -->
+
+                </div> <!-- content -->
+
+                <footer class="footer">
+                    © 2020 Weread 
+                </footer>
+
+            </div>
+            <!-- End Right content here -->
+		</div>
+        </div>
+        <!-- END wrapper -->
+
+
+         <!-- jQuery  -->
+        <script src="../assets/js/qs.js"></script>
+        <script src="../assets/js/vue.js"></script>
+        <script src="../assets/js/axios.js"></script>
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/popper.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/modernizr.min.js"></script>
+        <script src="../assets/js/detect.js"></script>
+        <script src="../assets/js/fastclick.js"></script>
+        <script src="../assets/js/jquery.slimscroll.js"></script>
+        <script src="../assets/js/jquery.blockUI.js"></script>
+        <script src="../assets/js/waves.js"></script>
+        <script src="../assets/js/jquery.nicescroll.js"></script>
+        <script src="../assets/js/jquery.scrollTo.min.js"></script>
+
+        <!-- App js -->
+        <script src="../assets/js/app.js"></script>
+
+		<script type="text/javascript">
+		 var vm=new Vue({
+				el:'#changePwd',
+				data:{
+					vName:'',
+					vPwd:'',
+					Introduce:'',
+					vID:''
+				},
+				methods:{
+					update:function(){
+						console.log(this.vName);
+						console.log(this.vPwd);
+						console.log(this.Introduce);
+						this.vID=2;
+						axios({
+	    					  url:'../../changePwd.action',
+	    					  method: 'post',
+	    					  responseType: 'text', 
+	    					  params:{
+	    						  op:'updateAdmin',
+	    						  nickname: this.nickname,
+	    						  vName:this.vName,
+	    						  vPwd:this.vPwd,
+	    						  Introduce:this.Introduce,
+	    						  vID:this.vID
+	    					  }
+	    					}).then(res => {
+	    					  console.log('请求结果：', res);
+	    					  if(res.data==""){
+	    						  alert("你真的修改了吗");
+	    					  }
+	    					})
+					}
+				},
+				mounted:function(){
+					axios.all([getMessage(),getContent()])
+					.then(axios.spread((fn1,fn2)=>{
+						/*this.hot=fn1.data;
+						this.main=fn2.data;
+						console.log(this.hot);
+						console.log(this.main);
+						*/
+					
+						
+						
+						
+					}));
+				}
+				
+			});
+			function getMessage(){
+				//return axios.get('section.action?op=findMessage');
+				return null;
+			}
+			function getContent(){
+				return null;
+			}
+		</script> 
+    </body>
+</html>

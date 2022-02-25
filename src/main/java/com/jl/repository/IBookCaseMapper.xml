@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IBookCaseDAO">
+
+    <insert id="add" parameterType="com.jl.bean.BookCase">
+        insert into bookcase values(null,#{userid},#{bid},#{sno},current_timestamp)
+    </insert>
+
+    <select id="find" parameterType="com.jl.bean.BookCase" resultType="com.jl.bean.BookCase">
+        select
+            bcid,userid,bid,sno,rtime
+        from
+            bookcase
+        where 1=1
+        <if test="userid!=null"> and userid=#{userid}</if>
+        <if test="bid!=null"> and bid=#{bid}</if>
+        <if test="sno!=null"> and sno=#{sno}</if>
+    </select>
+
+    <delete id="delete" parameterType="com.jl.bean.BookCase">
+        delete
+        from
+            bookcase
+        where 1=1
+        <if test="userid!=null"> and userid=#{userid}</if>
+        <if test="bcid!=null"> and bcid=#{bcid}</if>
+        <if test="bid!=null"> and bid=#{bid}</if>
+        <if test="sno!=null"> and sno=#{sno}</if>
+        <if test="sno!=null"> and sno=#{sno}</if>
+    </delete>
+
+    <update id="updateTime" parameterType="com.jl.bean.BookCase">
+        update bookcase set rtime = current_timestamp
+        <if test="sno!=null"> ,sno=#{sno} </if>
+        where 1=1
+        <if test="userid!=null"> and userid=#{userid}</if>
+        <if test="bcid!=null"> and bcid=#{bcid}</if>
+        <if test="bid!=null"> and bid=#{bid}</if>
+    </update>
+
+    <select id="findByBid"  resultType="com.jl.bean.BookCase">
+        select
+            bcid,userid,bid,sno,rtime
+        from
+            bookcase
+        where 1=1
+        <if test="uid!=null"> and userid=#{uid}</if>
+        <if test="bid!=null"> and bid=#{bid}</if>
+    </select>
+
+    <select id="findVO" parameterType="com.jl.bean.User" resultType="com.jl.bean.BookCaseVO">
+        select
+            c.bid bid,sno,bname,btype,authName,sname,rtime,wtime
+        from
+		    (select
+		        btype,authName,a.bid,bname,rtime
+		    FROM
+		        book,
+				(
+				select
+				    bid,sno,rtime
+				from
+				    bookcase
+				where 1=1
+				 <if test="userid!=null"> and userid=#{userid}</if>
+				 ) a
+			where a.bid=book.bid) b,
+			(
+			SELECT
+			    d.bid bid,d.sno sno,sname,wtime
+			from section,
+				 (
+				 select
+				    max(sno) sno,bid
+				 from
+				    section
+				 GROUP BY bid
+				 ) d
+			where
+			    d.bid=section.bid and d.sno=section.sno
+			) c
+		where
+		    c.bid=b.bid
+    </select>
+
+    <select id="getLength" resultType="java.lang.Integer" parameterType="com.jl.bean.User">
+        select
+            COUNT(*)
+        from
+            bookcase
+        where 1=1
+        <if test="userid!=null"> and userid=#{userid} </if>
+
+    </select>
+</mapper>

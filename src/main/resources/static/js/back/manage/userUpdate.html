@@ -1,0 +1,200 @@
+<div id="yc_goodtype">
+<!-- 添加 -->
+<div class="yc_gt_add">
+	<form id="gt_add" method="post">
+		<label>管理员账号</label>
+		<input class="easyui-validatebox" data-options="required:true" name="tname"/>
+		<a class="easyui-linkbutton gt_add_btn" href="javascript:void(0)">查找</a>
+	</form>
+</div>
+
+
+
+
+<!-- 表格显示数据 -->
+<table id="yc_gt_show"></table>
+
+<script type="text/javascript">
+//页面加载时显示所有的商品类型信息到表格中
+	$('#yc_gt_show').datagrid({
+		url:'../../goodstype.action?op=findAll',
+		pagination:true,//显示分页控件
+		pageList:[3,5,7,9],
+		pageSize:3,
+		columns:[[
+					{field:'tno',title:'管理员ID',width:100},		        
+					{field:'tname',title:'管理员账号',width:100}		        
+						
+					  
+		]]
+	});
+
+
+function update(tno,status){
+	$.get("../../goodstype.action",{op:'update',tno,status:status},function(data){
+		if(data.code==1){
+			//修改成功
+			//刷新表格
+			$('#yc_gt_show').datagrid('reload');
+		}else{
+			$.messager.alert('警告','修改失败')
+		}
+	},'json');
+}
+
+
+ //给超链接绑定点击事件
+$("#gt_add .gt_add_btn").click(function(){
+	//进行表单提交
+	$('#gt_add').form('submit',{
+		url:'../../goodstype.action',//配置fresh/goodstype.action x当前页面 fresh/back/manage/goodtype.action	找不到404
+		onSubmit:function(param){
+			param.op='add';
+		},
+		success:function(data){
+			//解析为json对象
+			data=eval('('+data+')');
+			if(data.code==1){
+				//右下角显示对话框 5秒后自动消失
+				$.messager.show({
+					title:'温馨提示',
+					msg:'添加成功',
+					timeout:5000,
+					showType:'slide'
+				});
+			}else{
+				$.messager.alert('警告','添加失败');
+			}
+		}
+		
+	});
+});
+
+</script>
+</div>
+
+
+
+
+
+
+<div class="yc_good_add">
+
+	<form id="yc_good_add" action="">
+		<table class="form_table pt15 pb15" width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				
+				<td class="td_right">用户姓名：</td>
+				<td>
+					<input type="text" id="price" name="price" class="input-text lh30" size="40" placeholder="请输入用户姓名">
+				</td>
+				
+				<td class="td_right">密码：</td>
+				<td>
+					<input type="text" id="price" name="price" class="input-text lh30" size="20" placeholder="请输入用户密码">
+				</td>
+				
+			</tr>
+			<tr>
+				<td class="td_right">邮箱：</td>
+				<td>
+					<input type="text" id="price" name="price" class="input-text lh30" size="30" placeholder="请输入用户邮箱">
+				</td>
+				
+				<td class="td_right">头像：</td>
+				<td>
+					<input type="file" id="pics" name="pics" class="input-text lh30" size="40" multiple="multiple" onchange="setImagePreviews(this,'showPics')">
+				</td>
+				<td></td>
+				<td></td>
+				
+			</tr>
+			<tr>
+				<td class="td_right">性别：</td>
+				<td>
+					<span>男</span><input type="radio" id="contactChoice1"name="contact" value="">
+					<span>女</span><input type="radio" id="contactChoice1"name="contact" value="">
+
+				</td>
+				<td class="td_right">喜爱类型：</td>
+				<td>
+					<select class="easyui-combobox select" style="width:100px"
+					data-options="valueField:'tno',textField:'tname',url:'../../goodstype.action?op=findAll'" name="tno" id="goodsType"><lect>
+				</td>
+				
+				
+			</tr>
+			<tr>
+				<td class="td_right">是否完结：</td>
+				<td>
+					<span>是</span><input type="radio" id="contactChoice1"name="contact" value="">
+					<span>否</span><input type="radio" id="contactChoice1"name="contact" value="">
+
+				</td>
+			
+				<td class="td_right">喜爱日期：</td> 
+				<td>
+					<input type="date" id="gname" name="title" class="input-text lh30" size="40">
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td colspan="5" align="center">
+					<div id="showPics">
+					
+					</div>
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<td colspan="4" align="center">
+					<input type="button" name="button" class="btn btn82 btn_save2" onclick="addGoodsInfo()" value="修改">
+					<input type="reset" name="button" class="btn btn82 btn_res" value="重置">
+				</td>
+			</tr></tbody>
+		</table>
+	</form>
+	<script type="text/javascript">
+	
+	//添加商品
+	function addGoodsInfo(){
+		//获取所有的元素
+		var gname =$("#gname").val();
+		var price =$("#price").val();
+		var balance =$("#balance").val();
+		var unit =$("#unit").val();
+		var qperid =$("#qperid").val();
+		var weight =$("#weight").val();
+		var intro =$("#intro").val();
+		var descr =CKEDITOR.instances.editor1.getData();//获取副编辑器文本数据
+		var tno =$("#goodsType").combobox("getValue");
+		console.log(tno);
+		console.log(descr);
+		
+		$.ajaxFileUpload({
+			url:'../../goodFileUpload.action',
+			secureuri:false,
+			fileElementId:'pics',
+			dataType:'json',
+			data:{tno:tno,gname,price:price,balance,unit:unit,qperied:qperied,
+					weight:weight,intro:intro,descr:descr},
+					
+			successs:function(data,status){
+				if(data.code==1){
+					//在右下角显示对话框  5s后自动消失
+					$.messagr.show({
+						title:'温馨提示',
+						msg:'添加成功',
+						timeout:5000,
+						showType:'slide'
+					});
+				}else{
+					$.messager.alert('警告',"添加失败");
+				}
+			}
+		});
+	}
+	</script>
+</div>
+

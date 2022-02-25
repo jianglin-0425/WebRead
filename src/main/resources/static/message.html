@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/center/index.6b94b.css" />
+		<script type="text/javascript" src="js/jquery-1.10.1.js" ></script>		
+		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/qs.js" ></script>
+		<script type="text/javascript" src="js/axios.js" ></script>
+	</head>
+	<body >
+	<div id="__main">
+			<div class="personal-header" data-l1="1">
+	                <div class="header-wrapper">
+	                    <div class="header-logo">
+	                        <a href="center.html">个人中心</a>
+	                    </div>
+	                    <ul class="header-nav">
+	                        <li class="header-nav-li">
+	                            <a href="center.html" class="header-nav-a " accesskey="1" data-eid="qd_M01"><i class="iconfont icon-home"></i>我的首页</a>
+	                        </li>
+	                        <li class="header-nav-li" id="headerNav">
+	                            <a href="bookshelf.html" class="header-nav-a " accesskey="2" data-eid="qd_M02"><i class="iconfont icon-book"></i>我的书架</a>
+	                        </li>
+	                        <li class="header-nav-li">
+	                            <a href="message.html" class="header-nav-a active" accesskey="3" data-eid="qd_M03"><i class="iconfont icon-msg"></i>消息中心</a>
+	                        </li>
+	                        <li class="header-nav-li">
+			                    <a href="index.html" class="header-nav-a " accesskey="2" data-eid="qd_M02">
+			                    	<i class="iconfont icon-book"></i>阅读网首页
+			                    </a>
+                   			 </li>
+	                    </ul>
+	                    <a href="center.html" id="headerLog" class="header-log" data-eid="qd_M06" data-target="headerDropList">
+	                        
+	                     	书友&nbsp;&nbsp;{{user.uname}}
+	                        
+	                    </a>
+	                  <ul id="headerDropList" class="header-drop" style="display: none;">
+	                    <li>
+	                        <a href="https://pay.yuewen.com/pc/index?appId=10&amp;areaId=1&amp;userGuid=1792594824&amp;returnUrl=https%3A%2F%2Fmy.qidian.com/message/sys" target="_blank" data-guid="1792594824" class="elNewToPay" data-eid="qd_M07">充值</a>
+	                    </li>
+	                    <li>
+	                        <a href="center.html" data-eid="qd_M09">我的主页</a>
+	                    </li>
+	                    <li>
+	                        <a href="ClientServerCenter.html" target="_blank" data-eid="qd_M10">客服中心</a>
+	                    </li>
+	                    <li>
+	                        <a href="" id="elLoginOut" data-eid="qd_M11">退出</a>
+	                    </li>
+	                </ul>
+	            </div>
+			<div class="qdp-wrapper">
+			<div class="personal-sideBar" data-l1="2">
+				<ul class="sideBar-group">
+					<li id="li_inform" class="active">
+						<a href="#" class="sideBar-list-a" data-eid="qd_M225" onclick="showInform()"><i class="iconfont icon-system"></i>系统通知</a>
+					</li>
+					
+				</ul>
+				<ul  class="sideBar-group">
+					<li id="li_feedBack" class="">
+						<a href="#" class="sideBar-list-a" data-eid="qd_M225"  onclick="showFeedBack_1()"><i class="iconfont icon-system"></i>反馈记录</a>
+					</li>
+				</ul>
+
+			</div>
+	        <div id="inform_div" class="qdp-content pr" data-l1="3">
+            <h2 class="qdp-title">
+              	  系统通知
+            </h2>
+            <a href="javascript:" id="jsEmptyMsg" class="msg-empty disabled blue"><i href="javascript:" class="blue iconfont icon-del" title="只显示前五条" data-l2="1" data-eid="qd_M227"></i>只显示前五条</a>
+            <div class="msg-record qdp-record" style="    border: 1px solid #e0deda;border-radius: 4px;background: #fff;">
+                    <div class="table-x">
+                        <div class="table-size ui-loading-animation" style="height: 341px; transition: height 200ms;">
+                            <table id="tableMsg" class="ui-table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col" width="140">来自</th>
+                                    <th scope="col">标题</th>
+                                    <th scope="col" width="130">回复日期</th>
+                                    <th scope="col" width="20">&nbsp;</th>
+                                  </tr>
+                                </thead>
+                                <tbody >
+                                	 <tr v-for="(m,index) in infos " @click="getInform(index)">
+									    <td>{{m.vname}}</td>
+									    <td>{{m.itype}}</td>
+									    <td>{{m.publishTime}}</td>
+									  </tr>
+                                </tbody>
+                            </table>
+                            <div class="table-null-x dn" style="display: block;" v-if="reply==null">目前尚未收到系统消息</div>
+                            <div class="ui-loading" style="top: 0px; display: none;"><i class="ui-loading-icon"></i></div>
+                         </div>
+                         <div class="table-page-x elTablePage">
+                             <div class="table-page" data-l2="1" data-eid="qd_M229"><div class="ui-page-x"><span class="ui-page ui-page-prev">
+                             </span><span class="ui-page ui-page-current">1</span><span class="ui-page ui-page-next"></span></div></div>
+                         </div>
+                    </div>
+            </div>
+       		</div>
+        	<div id="feedBack_div" data-l1="3" class="qdp-content pr" style="display:none;">
+	        	<h2 class="qdp-title">
+	              	  反馈记录
+	            </h2> 
+            	<a href="javascript:" id="jsEmptyMsg" class="msg-empty disabled blue">
+            		<i href="javascript:" title="清空当前页" data-l2="1" data-eid="qd_M227" class="blue iconfont icon-del"></i>只显示最近5条的记录
+            	</a>
+            	<div class="msg-record qdp-record" style="border: 1px solid rgb(224, 222, 218); border-radius: 4px; background: rgb(255, 255, 255);">
+            		<div class="table-x">
+            			<div class="table-size ui-loading-animation" style="height: 341px; transition: height 200ms ease 0s;">
+	            			<table id="tableMsg" class="ui-table">
+	            				<thead>
+	            					<tr>
+	            						<th scope="col" width="50">序号</th>
+	            						<th scope="col">标题</th>
+	            						<th scope="col" width="130">日期</th> 
+	            						<th scope="col" width="50">&nbsp;操作</th>
+	            					</tr>
+	            				</thead> 
+	            				<tbody>
+	            					<tr  v-for="(m,index) in feedBack " @click="getFeedBack(index)" >
+									    <td>{{index+1}}</td>
+									    <td>{{m.title}}</td>
+									    <td>{{m.wtime}}</td>
+
+										<td class="td_feedback" @click="deleteFeedBack(index)" ><a>查看</a></td>
+									</tr>
+	            				</tbody>
+	            			</table>
+	            			<div class="table-null-x dn" style="display: block;" v-if="feedBack==null">目前尚未收到系统消息</div>
+	            			<div class="ui-loading" style="top: 0px; display: none;"><i class="ui-loading-icon"></i></div>
+            			</div> 
+            			<div class="table-page-x elTablePage">
+            				<div data-l2="1" data-eid="qd_M229" class="table-page">
+            					<div class="ui-page-x">
+            						<span class="ui-page ui-page-prev"></span>
+            						<span class="ui-page ui-page-current">1</span>
+            						<span class="ui-page ui-page-next"></span>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+        	
+        </div>
+        <dialog id="showFeedBack" class="ui-dialog-container" style="display: none;">
+			<div class="ui-dialog" tabindex="-1" style="width: auto;">
+				<a href="javascript:" class="ui-dialog-close">
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+						<path d=""></path>
+					</svg>
+				</a>
+				<div class="ui-dialog-title">反馈</div>
+				<div class="ui-dialog-body">
+		            <div class="letter-pop">
+		                <form action="/ajax/message/send" method="post" novalidate="novalidate">
+		                <input type="hidden" name="_csrfToken" value="Hem839Q8ixolT0HrVTP2fRY9eNVcFWoXerLYfL3U" id="elMsgCsrf">
+		                    <h6 class="pop-title">标题</h6>
+		                    <div class="ui-input pop-receiver">
+		                        <label for="iptMsgPoster" class="receiver-select receiver-user"></label>
+		                        <input type="hidden" id="iptMsgSenderId" name="id">
+		                        <input type="hidden" id="iptMsgGuId" name="guid">
+		                        <input id="iptMsgPoster" v-model="content.title" name="key" autocomplete="off" readonly="true">
+		                    </div>
+		                    <h6 class="pop-title">内容</h6>
+		                    <div class="pop-content ui-textarea-x" style="width:440px;">
+		                        <textarea id="forLetterArea" name="content" maxlength="_500_" lang="zh" rows="5" required=""  placeholder="输入内容" readonly="true">{{content.content}}</textarea>
+		                        <div class="ui-textarea"></div>
+		                        <label for="forLetterArea" class="ui-textarea-count">
+		                            <span>0</span>/<span>500</span>
+		                        </label>
+		                    </div>
+		                    <div class="pop-submit">
+		                        <input type="button" id="dialogMsgSubmit" class="clip">
+		                         <a  onclick="closeMsg()" class="ui-button">关闭</a>
+		                    </div>
+
+		                </form>
+		            </div>
+        		</div>
+        	</div>
+        	<div class="ui-dialog-footer"></div>
+	
+        </dialog>
+		<dialog id="showReply" class="ui-dialog-container" style="display: none;">
+			<div class="ui-dialog" tabindex="-1" style="width: auto;">
+				<a href="javascript:" class="ui-dialog-close">
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+						<path d=""></path>
+					</svg>
+				</a>
+				<div class="ui-dialog-title">通知</div>
+				<div class="ui-dialog-body">
+		            <div class="letter-pop">
+		                <form action="/ajax/message/send" method="post" novalidate="novalidate">
+		                <input type="hidden" name="_csrfToken" value="Hem839Q8ixolT0HrVTP2fRY9eNVcFWoXerLYfL3U" id="elMsgCsrf">
+		                     <h6 class="pop-title">标题</h6>
+		                    <div class="ui-input pop-receiver">
+		                        <label for="iptMsgPoster" class="receiver-select receiver-user"></label>
+		                        <input type="hidden" id="iptMsgSenderId" name="id">
+		                        <input type="hidden" id="iptMsgGuId" name="guid">
+		                        <input id="iptMsgPoster" v-model="content.title" name="key" autocomplete="off" readonly="true">
+		                    </div>
+		                    <h6 class="pop-title">发件人</h6>
+		                    <div class="ui-input pop-receiver">
+		                        <label for="iptMsgPoster" class="receiver-select receiver-user"></label>
+		                        <input type="hidden" id="iptMsgSenderId" name="id">
+		                        <input type="hidden" id="iptMsgGuId" name="guid">
+		                        <input id="iptMsgPoster" v-model="content.vname" name="key" autocomplete="off" readonly="true">
+		                    </div>
+		                    <h6 class="pop-title">内容</h6>
+		                    <div class="pop-content ui-textarea-x" style="width:440px;">
+		                        <textarea id="forLetterArea" name="content" maxlength="_500_" lang="zh" rows="5" required=""  placeholder="输入内容" readonly="true">{{content.message}}</textarea>
+		                        <div class="ui-textarea"></div>
+		                        <label for="forLetterArea" class="ui-textarea-count">
+		                            <span>0</span>/<span>500</span>
+		                        </label>
+		                    </div>
+		                    <div class="pop-submit">
+		                        <input type="button" id="dialogMsgSubmit" class="clip">
+		                        <a href="message.html" class="ui-button">关闭</a>
+		                    </div>
+		                </form>
+		            </div>
+        		</div>
+        	</div>
+        
+        	<div class="ui-dialog-footer"></div>
+
+        </dialog>
+		<dialog id="showInform" class="ui-dialog-container" style="display: none;">
+			<div class="ui-dialog" tabindex="-1" style="width: auto;">
+				<a href="javascript:" class="ui-dialog-close">
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+						<path d=""></path>
+					</svg>
+				</a>
+				<div class="ui-dialog-title">通知</div>
+				<div class="ui-dialog-body">
+					<div class="letter-pop">
+						<form action="/ajax/message/send" method="post" novalidate="novalidate">
+							<input type="hidden" name="_csrfToken" value="Hem839Q8ixolT0HrVTP2fRY9eNVcFWoXerLYfL3U" id="elMsgCsrf">
+							<h6 class="pop-title">通知类型</h6>
+							<div class="ui-input pop-receiver">
+								<label for="iptMsgPoster" class="receiver-select receiver-user"></label>
+								<input type="hidden" id="iptMsgSenderId" name="id">
+								<input type="hidden" id="iptMsgGuId" name="guid">
+								<input id="iptMsgPoster" v-model="content.itype" name="key" autocomplete="off" readonly="true">
+							</div>
+							<h6 class="pop-title">发件人</h6>
+							<div class="ui-input pop-receiver">
+								<label for="iptMsgPoster" class="receiver-select receiver-user"></label>
+								<input type="hidden" id="iptMsgSenderId" name="id">
+								<input type="hidden" id="iptMsgGuId" name="guid">
+								<input id="iptMsgPoster" v-model="content.vname" name="key" autocomplete="off" readonly="true">
+							</div>
+							<h6 class="pop-title">内容</h6>
+							<div class="pop-content ui-textarea-x" style="width:440px;">
+								<textarea id="forLetterArea" name="content" maxlength="_500_" lang="zh" rows="5" required=""  placeholder="输入内容" readonly="true">{{content.content}}</textarea>
+								<div class="ui-textarea"></div>
+								<label for="forLetterArea" class="ui-textarea-count">
+									<span>0</span>/<span>500</span>
+								</label>
+							</div>
+							<div class="pop-submit">
+								<input type="button" id="dialogMsgSubmit" class="clip">
+								<a href="message.html" class="ui-button">关闭</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="ui-dialog-footer"></div>
+
+		</dialog>
+		</div>
+       </div>
+        <script src="js/jquery-1.10.1.js"></script>
+		<script type="text/javascript">
+			function showFeedBack_1(){
+				$("#li_feedBack").addClass("active");
+				$("#li_inform").removeClass("active");
+				$("#inform_div").css("display","none");
+				$("#feedBack_div").css("display","");
+			}
+			function showInform(){
+				$("#li_feedBack").removeClass("active");
+				$("#li_inform").addClass("active");
+				$("#feedBack_div").css("display","none");
+				$("#inform_div").css("display","");
+			}
+		
+			var vm=new Vue({
+				el:'#__main',
+				data:{
+					message:{},
+					content:{},
+					feedBack:{},
+					reply:{},
+					user:{},
+					infos:{}
+				},
+				methods:{
+					getFeedBack:function(index){
+						this.content=this.feedBack[index];
+						$("#showFeedBack").css("display","block");
+					},
+					deleteFeedBack:function(index){
+
+						//:TODO:删除操作
+						//f=this.feedBack[index];
+						//alert(f);
+						return;
+						/*$.post("feedback/deleteFeedBack",{fid:f.fid},
+								function(data){
+									console.log(data);
+									if(!data.code){
+										window.location.href="login.html";
+									}
+								},'json');
+
+						 */
+					},
+					getInform:function(index){
+						this.content=this.infos[index];
+						console.log(this.content);
+						$("#showInform").css("display","block");
+					}
+				},
+				mounted:function(){
+					axios.all([CheckLogin(),getFeedBack(),getinfo()])
+					.then(axios.spread((fn1,fn2,fn3)=>{
+						if(fn1.data.obj==null){
+							window.location.href="../login.html";
+						}
+						this.user=fn1.data.obj;
+						this.feedBack=fn2.data.obj.feedback;
+						this.reply=fn2.data.obj.reply;
+						this.infos=fn3.data.obj;
+						console.log(this.infos)
+						console.log(fn3.data);
+					}));
+				}
+				
+			});
+			function CheckLogin(){
+				return axios({
+					url:'user/checkLogin',
+					method:'get',
+					params:{}
+				});
+			}
+			function getFeedBack(){
+				return axios.get('feedback/findFeedBackVO') ;
+			}
+			$("#dialogMsgSubmit").click(function(){
+
+				$("#showMessage").css("display","none");
+			});
+			function getinfo(mid){
+				return axios({
+					url:'info/getInfo',
+					method:'get',
+					params:{iType:"普通"}
+				});
+			}
+			function closeMsg(){
+				$("#showFeedBack").css("display","none");
+			}
+		</script>
+
+	<script>
+		//事件冒泡的阻止: 因为  shoppingcar 是外面的大层  它的上面有一个click事件监听，所以   carbag是内部的层  他上面也有click事件，
+		// 这边carbag的click事件会被冒泡到    shoppingcar中捕捉
+		$(".td_feedback").on("click",function (event) {
+			event.stopPropagation();
+
+		})
+	</script>
+	</body>
+	
+</html>

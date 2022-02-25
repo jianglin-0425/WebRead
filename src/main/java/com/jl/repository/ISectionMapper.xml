@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.ISectionDAO">
+    <select id="getContent" resultType="com.jl.bean.SectionInfo"  >
+        select
+            sid,bid,sno,sname,content,wtime
+        from
+            section
+        where 1=1
+        <if test="sid!=null"> and sid=#{sid} </if>
+        <if test="sno!=null"> and sno=#{sno} </if>
+        <if test="bid!=null"> and bid=#{bid} </if>
+    </select>
+
+    <select id="getLength" resultType="java.lang.Integer" >
+        select
+            MAX(sno) length
+        from
+            section
+        where 1=1
+        <if test="bid!=null"> and bid=#{bid} </if>
+    </select>
+
+</mapper>

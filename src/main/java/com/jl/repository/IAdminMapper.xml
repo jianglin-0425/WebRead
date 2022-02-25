@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IAdminDAO">
+
+    <insert id="add">
+        insert into admin values(null,#{vName},#{vPwd},#{img});
+    </insert>
+
+    <select id="find" resultType="com.jl.bean.Admin">
+        select
+            *
+        from
+            admin
+        <where>
+            <if test="vName!=null"> and vName=#{vName} </if>
+            <if test="vPwd!=null"> and vPwd=#{vPwd} </if>
+            <if test="vID!=null"> and vID=#{vID} </if>
+        </where>
+    </select>
+
+    <update id="updatePwd">
+        update admin
+        <set>
+            <if test="vPwd!=null"> vpwd=#{vPwd},</if>
+            <if test="img!=null"> img =#{img} </if>
+        </set>
+        <where>
+            <if test="vID!=null"> and vID=#{vID} </if>
+            <if test="vName!=null"> and vName=#{vName}</if>
+        </where>
+    </update>
+
+    <select id="findByTrem" resultType="com.jl.bean.Admin">
+        select
+        *
+        from
+        admin
+        <where>
+            <if test="vName!=null"> and vName=#{vName} </if>
+            <if test="vPwd!=null"> and vPwd=#{vPwd} </if>
+        </where>
+    </select>
+</mapper>

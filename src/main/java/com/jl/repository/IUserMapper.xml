@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IUserDAO">
+
+    <insert id="add"   parameterType="com.jl.bean.User" >
+        insert into user(uname,upwd,email,uintro,sex,ftype,img)
+        values(#{uname},MD5(#{upwd}),#{email},#{uintro},#{sex},#{ftype},#{img});
+    </insert>
+
+    <select id="findOne" resultType="com.jl.bean.User" parameterType="com.jl.bean.User" >
+        select
+            userid,uname,upwd,email,uintro,sex,ftype,img
+        from user
+        where uname = #{uname} and upwd=MD5(#{upwd});
+    </select>
+
+    <update id="updateUser" parameterType="com.jl.bean.User">
+        update user
+        <set>
+            <if test="upwd!=null">upwd=#{upwd},</if>
+            <if test="uintro!=null">uintro=#{uintro},</if>
+            <if test="sex!=null">sex=#{sex},</if>
+            <if test="ftype!=null">ftype=#{ftype},</if>
+            <if test="img!=null">img=#{img}</if>
+        </set>
+        where userID=#{userID}
+    </update>
+
+    <select id="findMany"  resultType="com.jl.bean.User">
+        select
+        *
+        from user
+
+
+        <if test="pageSize!=null and curIndex!=null ">
+            limit #{curIndex} , #{pageSize}
+        </if>
+
+
+
+        order by userID desc
+        ;
+    </select>
+
+    <select id="findCondition"  resultType="com.jl.bean.User">
+        select
+        *
+        from user
+
+
+        where 1=1
+
+        <if test="user.userid!=null"> and uid=#{user.userid}   </if>
+        <if test="user.uname!=null"> and uname=#{user.uname}   </if>
+
+        order by userID desc
+
+        <if test="pageIndex!=null and pageSize!=null">
+            <bind name="key_offset" value="(pageIndex)*pageSize"></bind>
+            LIMIT #{key_offset},#{pageSize}
+        </if>
+
+    </select>
+
+    <select id="getEmailCount"  resultType="java.lang.Integer">
+       select
+            COUNT(*) count
+       from `user`
+        where 1=1
+            <if test="email!=null">
+               and email=#{email}
+            </if>
+       GROUP BY email ;
+    </select>
+</mapper>

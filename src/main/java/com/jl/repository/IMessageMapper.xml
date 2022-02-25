@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IMessageDAO">
+    <select id="findMessage" resultType="com.jl.bean.MessageVO"  >
+        select
+            mid,uname,title,sendTime,reciver
+        from
+            message,user
+        where 1=1
+            <if test="reciver!=null"> and reciver=#{reciver}</if>
+            and sender=userid
+    </select>
+
+    <select id="findContent" resultType="com.jl.bean.MessageVO" >
+        select
+            mid,uname,title,message,sendTime,reciver
+        from
+            message,user
+        where 1=1
+        <if test="mid!=null"> and mid=#{mid}</if>
+        and sender=userid
+
+    </select>
+
+</mapper>

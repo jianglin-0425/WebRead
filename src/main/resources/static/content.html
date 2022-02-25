@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/biquge.css" />
+		<script type="text/javascript" src="js/jquery-1.10.1.js" ></script>
+		<script type="text/javascript" src="js/push.js" ></script>
+		<script type="text/javascript" src="js/bqg.js" ></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/qs.js" ></script>
+		<script type="text/javascript" src="js/axios.js" ></script>
+		
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="ywtop">
+				<div class="ywtop_con">
+					<div class="ywtop_sethome">
+						<a href="#">将笔趣阁快捷方式保存到桌面</a>
+					</div>
+					<div class="ywtop_addfavorite">
+						<a href="#" onclick="javascript:window.external.addFavorite('http://www.xbiquge.la','新笔趣阁_书友最值得收藏的网络小说阅读网')">收藏新笔趣阁</a>
+					</div>
+					<div class="nri">
+						<form name="frmlogin" id="frmlogin" method="post" class="show" >
+							<div class="ccc"v-if="user==null">
+								<div class="txtt" >
+									<a href="login.html">登录</a>
+								</div>
+								<div class="txtt"><a href="register.html">用户注册</a></div>
+							</div>
+						</form>
+						<div v-if="user!=null ">
+							Hi,&nbsp;&nbsp;{{user.uname}}&nbsp;&nbsp;
+							<a href="#" target="_top">个人中心</a>
+							|
+							<a href="#" @click="outLogin()">退出登录</a>
+							&nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="header">
+				<div class="header_logo">
+					<a href="index.html" style="background-image: url(images/logo.png);">阅览阁</a>
+				</div>
+				<div class="header_search">
+					<form name="form" id="sform">
+						<input type="text" value="可搜书名和作者，请您少字也别输错字。" name="searchkey" class="search" id="wd" baidusug="2" autocomplete="off">			
+						<button id="sss"> 搜 索 </button>
+					</form>
+					
+				</div>
+				<div class="userpanel">
+					&nbsp;
+					<font color="red">留言: </font>
+					<a rel="nofollow" href="feedBack.html?title=求书加书">
+						<font color="red">求书加书</font>
+					</a>
+					,
+					<a rel="nofollow" href="feedBack.html?title=意见反馈">意见反馈</a>
+					&nbsp;
+					<a rel="nofollow" href="ClientServerCenter.html">联系我们</a>
+					&nbsp;
+					&nbsp;
+					<a rel="nofollow" href="feedBack.html?title=书籍反馈">书籍反馈</a>
+				</div>
+			</div>
+			<div class="nav">
+				<ul>
+					<li><a href="index.html">首页</a></li>
+					<li><a href="bookshelf.html">我的书架</a></li>
+					<li><a href="type.html?type=玄幻">玄幻小说</a></li>
+					<li><a href="type.html?type=修真">修真小说</a></li>
+					<li><a href="type.html?type=都市">都市小说</a></li>
+					<li><a href="type.html?type=穿越">穿越小说</a></li>
+					<li><a href="type.html?type=网游">网游小说</a></li>
+					<li><a href="type.html?type=科幻">科幻小说</a></li>
+					<li><a href="rank.html">排行榜单</a></li>
+				</ul>
+			</div>
+			<div  class="content_read">
+            <div id="content_read" class="box_con">
+                <div class="con_top">
+                    <script>textselect();</script><div id="page_set" style="display: none;">
+					<select onchange="javascript:setFont(this.options[this.selectedIndex].value);" id="bcolor" name="bcolor"><option value="宋体">字体</option><option value="方正启体简体">默认</option><option value="黑体">黑体</option><option value="楷体_GB2312">楷体</option><option value="微软雅黑">雅黑</option><option value="方正启体简体">启体</option><option value="宋体">宋体</option></select>
+					<select onchange="javascript:setColor(this.options[this.selectedIndex].value);" id="bcolor" name="bcolor"><option value="#000">颜色</option><option value="#000">默认</option><option value="#9370DB">暗紫</option><option value="#2E8B57">藻绿</option><option value="#2F4F4F">深灰</option><option value="#778899">青灰</option><option value="#800000">栗色</option><option value="#6A5ACD">青蓝</option><option value="#BC8F8F">玫褐</option><option value="#F4A460">黄褐</option><option value="#F5F5DC">米色</option><option value="#F5F5F5">雾白</option></select>
+					<select onchange="javascript:setSize(this.options[this.selectedIndex].value);" id="bcolor" name="bcolor"><option value="#E9FAFF">大小</option><option value="19pt">默认</option><option value="10pt">10pt</option><option value="12pt">12pt</option><option value="14pt">14pt</option><option value="16pt">16pt</option><option value="18pt">18pt</option><option value="20pt">20pt</option><option value="22pt">22pt</option><option value="25pt">25pt</option><option value="30pt">30pt</option></select>
+					<select name="scrollspeed" id="scrollspeed" onchange="javascript:setSpeed(this.options[this.selectedIndex].value);"><option value="5">滚屏</option><option value="1">最慢</option><option value="2">慢2</option><option value="3">慢3</option><option value="4">中4</option><option value="5">中5</option><option value="6">中6</option><option value="7">快7</option><option value="8">快8</option><option value="9">快9</option><option value="10">最快</option></select><select onchange="javascript:setBGColor(this.options[this.selectedIndex].value);" id="bcolor" name="bcolor"><option value="#E9FAFF" style="background-color: #E9FAFF;">背景</option><option value="#E9FAFF" style="background-color: #E9FAFF;">默认</option><option value="#FFFFFF" style="background-color: #FFFFFF;">白雪</option><option value="#000000" style="background-color: #000000;color:#FFFFFF;">漆黑</option><option value="#FFFFED" style="background-color: #FFFFED;">明黄</option><option value="#EEFAEE" style="background-color: #EEFAEE;">淡绿</option><option value="#CCE8CF" style="background-color: #CCE8CF;">草绿</option><option value="#FCEFFF" style="background-color: #FCEFFF;">红粉</option><option value="#EFEFEF" style="background-color: #EFEFEF;">深灰</option><option value="#F5F5DC" style="background-color: #F5F5DC;">米色</option><option value="#D2B48C" style="background-color: #D2B48C;">茶色</option><option value="#C0C0C0" style="background-color: #E7F4FE;">银色</option></select>
+					<select onchange="javascript:setWidth(this.options[this.selectedIndex].value);" id="bcolor" name="bcolor"><option value="95%">宽度</option><option value="95%">默认</option><option value="85%">85%</option><option value="76%">75%</option><option value="67%">65%</option><option value="53%">50%</option><option value="41%">40%</option></select>
+					</div>
+
+                    <a href="index.html">新笔趣阁</a> &gt; <a id="top_type" href="">修真小说</a> &gt; <a id="book-name" href="http://www.xbiquge.la/10/10489/">三寸人间</a><lable id="top_title"> &gt; 正文卷 第一章 我要减肥！    </lable>            </div>
+                <div class="bookname">
+                    <h1 id="chapterNAme"></h1>
+                    <div class="bottem1">
+                        <a href="javascript:;" @click="vote()">投推荐票</a> 
+                        <a :href="'content.html?bid='+section.bid+'&sno='+(section.sno-1)" v-if="section.sno>1">上一章</a>
+	                    <a href="#" v-else>上一章</a> 
+	                    ← 
+                        <a :href="'book.html?bid='+section.bid">章节目录</a> → 
+                        <a :href="'content.html?bid='+section.bid+'&sno='+(section.sno+1)" v-if="section.sno<length">下一章</a> 
+	                    <a href="#" v-else>下一章</a>
+                        <a href="javascript:;" @click="addBookCase()">加入书架</a>
+                    </div>
+                                        <div id="listtj">&nbsp;推荐阅读：<a href="/9/9785/" target="_blank">剑卒过河</a>、<a href="/0/10/" target="_blank">武炼巅峰</a>、<a href="/26/26874/" target="_blank">沧元图</a>、<a href="/15/15409/" target="_blank">牧神记</a>、<a href="/26/26511/" target="_blank">剑徒之路</a>、<a href="/2/2029/" target="_blank">极品透视</a>、<a href="/1/1988/" target="_blank">龙城</a>、<a href="/13/13959/" target="_blank">圣墟</a>、<a href="/32/32626/" target="_blank">叶辰孙怡夏若雪</a>、<a href="/0/951/" target="_blank">伏天氏</a>、<a href="/30/30581/" target="_blank">顶级神豪</a>、<a href="/20/20948/" target="_blank">最佳女婿</a>、<a href="/0/656/" target="_blank">莽荒纪</a>、<a href="/14/14930/" target="_blank">元尊</a>、<a href="/7/7552/" target="_blank">万古神帝</a></div>
+                </div>
+                <table style="width:100%; text-align:center;"><tbody><tr><td><script>read_1_1();</script></td><td><script>read_1_2();</script></td><td><script>read_1_3();</script></td></tr></tbody></table>
+                <div id="content">
+                	<pre style="white-space: pre-wrap;">{{section.content}}</pre>
+	                <div class="bottem2">
+	                    <a href="javascript:;" @click="vote()">投推荐票</a> 
+	                   <a :href="'content.html?bid='+section.bid+'&sno='+(section.sno-1)" v-if="section.sno>1">上一章</a>
+	                   <a href="#" v-else>上一章</a>
+	                     ← 
+	                    <a :href="'book.html?bid='+section.bid">章节目录</a>
+	                     → 
+	                    <a :href="'content.html?bid='+section.bid+'&sno='+(section.sno+1)" v-if="section.sno<length">下一章</a> 
+	                    <a href="#" v-else>下一章</a>
+	                    <a href="javascript:;" @click="addBookCase()">加入书架</a>
+	                </div>
+	                <div id="hm_t_54219"></div>
+	            </div>
+	        </div>			
+			<div class="dahengfu"></div>
+			<div id="footer" name="footer">
+	            <div class="footer_link">&nbsp;新书推荐：
+	            	<a href="http://www.qtshu.com/jiushuyouhu/" target="_blank">三寸人间</a>、
+	            	<a href="http://www.xbiquge.la/72/72278/" target="_blank">破虚狂雷</a>、
+	            	<a href="http://www.xbiquge.la/72/72277/" target="_blank">修仙界最后的单纯</a>、
+	            	<a href="http://www.xbiquge.la/72/72276/" target="_blank">妻妾一家欢</a>、
+	            	<a href="http://www.xbiquge.la/72/72275/" target="_blank">抱歉，女配变心了</a>、
+	            	<a href="http://www.xbiquge.la/72/72274/" target="_blank">随身系统：神医小农女</a>
+	            </div>
+	            <div class="footer_cont">
+	                <p>《三寸人间》情节跌宕起伏、扣人心弦1，是一本情节与文笔俱佳的修真小说，新笔趣阁转载收集三寸人间最新章节。</p>
+	                <p>本站所有小说为转载作品，所有章节均由网友上传，转载至本站只是为了宣传本书让更多读者欣赏。</p>
+					<p>Copyright © 2015-2022 
+						<a href="http://www.xbiquge.la/">新笔趣阁</a>
+						 All Rights Reserved.
+					</p>
+					<p>沪ICP备14048333号</p>
+	            </div>
+	        </div>
+		</div>
+		</div>
+		<script type="text/javascript">
+		var urls=window.location.href.split("?")[1].split("&");
+		var bid=urls[0].split("=")[1];
+		var sno=urls[1].split("=")[1];
+		
+		console.log(bid)
+		console.log(sno)
+		var vm=new Vue({
+			el:'#wrapper',
+			data:{
+				section:{},
+				book:{},
+				length:0,
+				user:{},
+				data:{}
+			},
+			methods:{
+				outLogin:function(){
+					axios({
+						url:'user/OutLogin',
+						method:'post',
+						params:{}
+					}).then(result=>{
+						if(result.data==1){
+							location.reload();	
+						}else{
+							alert('用户登录失败');
+						}
+					});
+				},
+				vote:function(){
+					axios({
+						url:'vote/vote',
+						method:'post',
+						params:{bid:bid}
+					}).then(result=>{
+						console.log(result);
+					});
+				},
+				addBookCase:function(){
+					axios({
+						url:'bookCase/add',
+						method:'post',
+						params:{bid:bid,sno:sno}
+					}).then(result=>{
+						if(result>0)
+							alert("加入成功");
+					});
+				}
+			},
+			mounted:function(){
+				axios.all([findInfo(this.sid),getMainInfo(),CheckLogin()])
+				.then(axios.spread((fn1,fn2,fn3)=>{
+					this.section=fn1.data.obj.content;
+					this.book=fn1.data.obj.book;
+					this.length=fn1.data.obj.length;
+					$("#chapterNAme").html(this.section.sname);
+					$("#top_title").html("&gt;"+this.section.sname);
+					$("#top_type").html(this.book.btype+"小说");
+					$("#book-name").html(this.book.bname);
+					$("#top_type").attr("href","type.html?type="+this.book.btype);
+					$("#book-name").attr("href","book.html?bid="+this.book.bid);
+					if(this.section.sno>1)
+					{
+						$("#padge-pre").attr("href","content.html?bid="+this.section.bid+"&sno="+(this.section.sno-1));
+					}
+					this.user=fn3.data.obj;
+				}));
+			}
+			
+		});
+		function findInfo(sid){
+			//return axios.get('section/findContent&bid='+bid+"&sno="+sno);
+			return axios({
+				url:'section/findContent',
+				method:'get',
+				params:{bid:bid.replace("#",""),sno:sno.replace("#","")}
+			});
+		
+		}
+		function getMainInfo(){
+			
+		}
+		function CheckLogin(){
+			return axios({
+				url:'user/checkLogin',
+				method:'get',
+				params:{}
+			});
+		}
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,120 @@
+2021-05-31 12:08:01.525  INFO 16248 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 16248 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 12:08:01.745  INFO 16248 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 12:10:48.486  INFO 12716 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 12716 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 12:10:48.489  INFO 12716 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 12:14:07.591  INFO 2884 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 2884 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 12:14:07.594  INFO 2884 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 12:14:11.141  WARN 2884 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 12:14:11.671  INFO 2884 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 4.472 seconds (JVM running for 5.275)
+2021-05-31 15:42:03.709  INFO 7876 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 7876 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 15:42:04.031  INFO 7876 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 15:42:08.166  WARN 7876 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'adminServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'IAdminDAO' defined in file [F:\Course\软件工程\代码\demo\target\classes\com\jl\repository\IAdminDAO.class]: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required
+2021-05-31 15:42:08.245 ERROR 7876 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'adminServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'IAdminDAO' defined in file [F:\Course\软件工程\代码\demo\target\classes\com\jl\repository\IAdminDAO.class]: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:321) ~[spring-context-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1413) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.6.jar:5.3.6]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.6.jar:5.3.6]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:144) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:782) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:774) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:339) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1340) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1329) [spring-boot-2.4.5.jar:2.4.5]
+	at com.jl.DemoApplication.main(DemoApplication.java:13) [classes/:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'IAdminDAO' defined in file [F:\Course\软件工程\代码\demo\target\classes\com\jl\repository\IAdminDAO.class]: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1786) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:521) ~[spring-context-5.3.6.jar:5.3.6]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:497) ~[spring-context-5.3.6.jar:5.3.6]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:650) ~[spring-context-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:228) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessProperties(CommonAnnotationBeanPostProcessor.java:318) ~[spring-context-5.3.6.jar:5.3.6]
+	... 18 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required
+	at org.springframework.util.Assert.notNull(Assert.java:201) ~[spring-core-5.3.6.jar:5.3.6]
+	at org.mybatis.spring.support.SqlSessionDaoSupport.checkDaoConfig(SqlSessionDaoSupport.java:74) ~[mybatis-spring-1.3.1.jar:1.3.1]
+	at org.mybatis.spring.mapper.MapperFactoryBean.checkDaoConfig(MapperFactoryBean.java:73) ~[mybatis-spring-1.3.1.jar:1.3.1]
+	at org.springframework.dao.support.DaoSupport.afterPropertiesSet(DaoSupport.java:44) ~[spring-tx-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-5.3.6.jar:5.3.6]
+	... 33 common frames omitted
+
+2021-05-31 15:42:29.790  INFO 20000 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 20000 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 15:42:29.792  INFO 20000 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 15:42:34.258  WARN 20000 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 15:42:34.728  INFO 20000 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 5.43 seconds (JVM running for 7.577)
+2021-05-31 16:45:14.718  INFO 20244 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 20244 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 16:45:14.968  INFO 20244 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 16:45:17.397  WARN 20244 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 16:45:17.639  INFO 20244 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 3.297 seconds (JVM running for 4.258)
+2021-05-31 16:46:27.358  INFO 20000 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 20000 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 16:46:27.361  INFO 20000 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 16:46:29.759  WARN 20000 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 16:46:30.003  INFO 20000 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 3.13 seconds (JVM running for 4.337)
+2021-05-31 16:47:12.273  INFO 20016 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 20016 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 16:47:12.276  INFO 20016 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 16:47:14.912  WARN 20016 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 16:47:15.194  INFO 20016 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 3.633 seconds (JVM running for 4.609)
+2021-05-31 16:48:09.849  INFO 18672 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 18672 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 16:48:09.852  INFO 18672 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 16:48:12.574  WARN 18672 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 16:48:12.864  INFO 18672 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 3.67 seconds (JVM running for 4.627)
+2021-05-31 16:49:48.279  INFO 5784 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 5784 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 16:49:48.282  INFO 5784 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 16:49:51.510  WARN 5784 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 16:49:51.882  INFO 5784 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 3.994 seconds (JVM running for 4.736)
+2021-05-31 16:54:33.879  INFO 2320 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 2320 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 16:54:33.887  INFO 2320 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 16:54:36.464  WARN 2320 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 16:54:36.700  INFO 2320 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 3.696 seconds (JVM running for 4.697)
+2021-05-31 16:56:35.196  INFO 7176 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 7176 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 16:56:35.199  INFO 7176 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 16:56:38.038  WARN 7176 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 16:56:38.275  INFO 7176 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 3.619 seconds (JVM running for 4.535)
+2021-05-31 17:03:19.268  INFO 2952 --- [main] com.jl.repository.IBookDAOTest           : Starting IBookDAOTest using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 2952 (started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 17:03:19.270  INFO 2952 --- [main] com.jl.repository.IBookDAOTest           : No active profile set, falling back to default profiles: default
+2021-05-31 17:03:24.177  WARN 2952 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 17:03:25.350  INFO 2952 --- [main] com.jl.repository.IBookDAOTest           : Started IBookDAOTest in 6.494 seconds (JVM running for 8.447)
+2021-05-31 17:04:20.549  INFO 5160 --- [main] com.jl.repository.BookDaoTest            : Starting BookDaoTest using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 5160 (started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 17:04:20.551  INFO 5160 --- [main] com.jl.repository.BookDaoTest            : No active profile set, falling back to default profiles: default
+2021-05-31 17:04:23.977  WARN 5160 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 17:04:24.599  INFO 5160 --- [main] com.jl.repository.BookDaoTest            : Started BookDaoTest in 4.407 seconds (JVM running for 5.632)
+2021-05-31 17:04:44.694  INFO 17520 --- [main] com.jl.repository.IUserDAOTest           : Starting IUserDAOTest using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 17520 (started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 17:04:44.696  INFO 17520 --- [main] com.jl.repository.IUserDAOTest           : No active profile set, falling back to default profiles: default
+2021-05-31 17:04:48.191  WARN 17520 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 17:04:48.903  INFO 17520 --- [main] com.jl.repository.IUserDAOTest           : Started IUserDAOTest in 4.59 seconds (JVM running for 5.871)
+2021-05-31 17:05:24.309  INFO 1636 --- [main] com.jl.repository.IBookDAOTest           : Starting IBookDAOTest using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 1636 (started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 17:05:24.337  INFO 1636 --- [main] com.jl.repository.IBookDAOTest           : No active profile set, falling back to default profiles: default
+2021-05-31 17:05:27.755  WARN 1636 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 17:05:28.439  INFO 1636 --- [main] com.jl.repository.IBookDAOTest           : Started IBookDAOTest in 4.58 seconds (JVM running for 5.753)
+2021-05-31 17:06:16.842  INFO 10904 --- [main] com.jl.repository.IBookDAOTest           : Starting IBookDAOTest using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 10904 (started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 17:06:16.846  INFO 10904 --- [main] com.jl.repository.IBookDAOTest           : No active profile set, falling back to default profiles: default
+2021-05-31 17:06:20.263  WARN 10904 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 17:06:20.980  INFO 10904 --- [main] com.jl.repository.IBookDAOTest           : Started IBookDAOTest in 4.663 seconds (JVM running for 5.848)
+2021-05-31 17:06:29.915  INFO 5676 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 5676 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 17:06:29.917  INFO 5676 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 17:06:33.287  WARN 5676 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 17:06:33.550  INFO 5676 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 4.008 seconds (JVM running for 4.771)
+2021-05-31 17:11:07.003  INFO 20428 --- [main] com.jl.DemoApplication                   : Starting DemoApplication using Java 1.8.0_211 on DESKTOP-PH99UV2 with PID 20428 (F:\Course\软件工程\代码\demo\target\classes started by peterlin in F:\Course\软件工程\代码\demo)
+2021-05-31 17:11:07.005  INFO 20428 --- [main] com.jl.DemoApplication                   : No active profile set, falling back to default profiles: default
+2021-05-31 17:11:09.499  WARN 20428 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-31 17:11:09.744  INFO 20428 --- [main] com.jl.DemoApplication                   : Started DemoApplication in 3.139 seconds (JVM running for 4.076)

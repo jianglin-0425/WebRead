@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/center/index.6b94b.css" />
+		<script type="text/javascript" src="js/jquery-1.10.1.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/qs.js" ></script>
+		<script type="text/javascript" src="js/axios.js" ></script>
+	</head>
+	<body>
+	
+		<dialog id="showMessage" class="ui-dialog-container" style="display: block;" style="margin-top: -41px;">
+			<div class="ui-dialog" tabindex="-1" style="width: auto;">
+				<a href="index.html" class="ui-dialog-close">
+					关闭
+				</a>
+				<div class="ui-dialog-title">反馈</div>
+				<div class="ui-dialog-body">
+		            <div class="letter-pop">
+		                <form action="/ajax/message/send" method="post" novalidate="novalidate">
+							<input type="hidden" name="_csrfToken" value="Hem839Q8ixolT0HrVTP2fRY9eNVcFWoXerLYfL3U" id="elMsgCsrf">
+		                    <h6 class="pop-title">标题</h6>
+		                    <div class="ui-input pop-receiver">
+		                        <label for="iptMsgPoster" class="receiver-select receiver-user"></label>
+		                        <input type="hidden" id="iptMsgSenderId" name="id">
+		                        <input type="hidden" id="iptMsgGuId" name="guid">
+		                        <input id="iptMsgPoster" placeholder="标题(不超过15个字)" name="key" autocomplete="off" readonly="true">
+		                    </div>
+		                    <h6 class="pop-title">反馈内容</h6>
+		                    <div class="pop-content ui-textarea-x" style="width:440px;">
+		                        <textarea id="forLetterArea" name="content" maxlength="_500_" lang="zh" rows="5" required="" placeholder="输入内容"></textarea>
+		                        <div class="ui-textarea"></div>
+		                        <label for="forLetterArea" class="ui-textarea-count">
+		                            <span>0</span>/<span>500</span>
+		                        </label>
+		                    </div>
+		                    <div class="pop-submit">
+		                        <input type="button" id="dialogMsgSubmit" class="clip" onclick="sendFeedBack()">
+		                        <label class="ui-button" for="dialogMsgSubmit">发送</label>
+		                    </div>
+		                </form>
+		            </div>
+        		</div>
+        	<div class="ui-dialog-footer"></div>
+		</div>
+        </dialog>
+        
+        <script type="text/javascript" > 
+        var urls=window.location.href.split("?")[1];
+    	var title=decodeURI(urls.split("=")[1]);
+    	var x = document.getElementById("showMessage");
+    	$("#iptMsgPoster").val(title);
+    	console.log(title);
+        checkLogin();
+        function checkLogin(){
+	        $.post("user/checkLogin",{},
+    	   		function(data){
+	        	console.log(data);
+    		   		if(!data.code){
+    		   			window.location.href="login.html";
+    		   		}
+    	   		},'json');
+        }
+        
+        function sendFeedBack(){
+	        title=$('#iptMsgPoster').val();
+	     	console.log(title);
+	     	content=$('#forLetterArea').val();
+	     	console.log(content);
+	     	if(title==null||title==""||content==null||content==""){
+	     		alert("标题或内容不能为空");
+	     		return ;
+	     	}
+	   		$.post("feedback/addFeedBack",{title:title,content:content},
+	   		function(data){
+		   		if(data){
+		   			alert("已成功发送反馈，工作人员正在加班加点的为您服务中....");
+		   			window.location.href="message.html";
+		   		}else{
+		   			alert("发送失败");
+		   		}
+		   		
+	   		},'json');
+        }
+        
+        </script>
+	</body>
+</html>

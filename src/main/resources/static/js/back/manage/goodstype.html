@@ -1,0 +1,197 @@
+<div id="searchbar">
+<script type="text/javascript">  
+    function qq(value,name){  
+    	alert(value+":"+name)   
+    }   
+</script>  
+  
+<input id="ss" class="easyui-searchbox" style="width:300px"  
+        data-options="searcher:qq,prompt:'Please Input Value',menu:'#mm'"></input>  
+           
+<div id="mm" style="width:120px">  
+    <div data-options="name:'all',iconCls:'icon-ok'">书籍编号</div> 
+        <div data-options="name:'sports'">书籍名称</div>  
+
+</div>
+</div>
+
+<!-- 表格显示数据 -->
+<table id="yc_gt_show"></table>
+
+<script type="text/javascript">
+//页面加载时显示所有的商品类型信息到表格中
+	$('#yc_gt_show').datagrid({
+		url:'../../goodstype.action?op=findAll',
+		pagination:true,//显示分页控件
+		pageList:[3,5,7,9],
+		pageSize:3,
+		columns:[[
+					{field:'tno',title:'书籍编号',width:100},		        
+					{field:'tname',title:'书籍名称',width:100},		        
+					{field:'status',title:'书籍状态',width:100,align:'right',formatter:function(value,row,index){
+						if(value==1){
+							return '<span style="color:green;">已上架</span>';
+						}else{
+							return '<span style="color:red;">已下架</span>';
+						}
+					}},		
+					{field:'aa',title:'操作',width:100,formatter:function(value,row,index){
+						if(row.status==0){
+							return '<a href="javascript:update('+row.tno+',1)" style="color:green;">上架</a>';
+						}else{
+							return '<a href="javascript:update('+row.tno+',0)" style="color:red;">下架</a>';
+						}
+				}}	        
+		]]
+	});
+
+
+function update(tno,status){
+	$.get("../../goodstype.action",{op:'update',tno,status:status},function(data){
+		if(data.code==1){
+			//修改成功
+			//刷新表格
+			$('#yc_gt_show').datagrid('reload');
+		}else{
+			$.messager.alert('警告','修改失败')
+		}
+	},'json');
+}
+
+
+ //给超链接绑定点击事件
+$("#gt_add .gt_add_btn").click(function(){
+	//进行表单提交
+	$('#gt_add').form('submit',{
+		url:'../../goodstype.action',//配置fresh/goodstype.action x当前页面 fresh/back/manage/goodtype.action	找不到404
+		onSubmit:function(param){
+			param.op='add';
+		},
+		success:function(data){
+			//解析为json对象
+			data=eval('('+data+')');
+			if(data.code==1){
+				//右下角显示对话框 5秒后自动消失
+				$.messager.show({
+					title:'温馨提示',
+					msg:'添加成功',
+					timeout:5000,
+					showType:'slide'
+				});
+			}else{
+				$.messager.alert('警告','添加失败');
+			}
+		}
+		
+	});
+});
+
+</script>
+</div>
+
+<div class="yc_good_add">
+
+	<form id="yc_good_add" action="">
+		<table class="form_table pt15 pb15" width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td class="td_right">书籍类型：</td>
+				<td>
+					<select class="easyui-combobox select" style="width:100px"
+					data-options="valueField:'tno',textField:'tname',url:'../../goodstype.action?op=findAll'" name="tno" id="goodsType"><lect>
+				</td>
+				<td class="td_right">书籍名称：</td> 
+				<td>
+					<input type="text" id="gname" name="title" class="input-text lh30" size="40" placeholder="请输入书籍名称">
+				</td>
+				<td class="td_right">作者：</td>
+				<td>
+					<input type="text" id="price" name="price" class="input-text lh30" size="40" placeholder="请输入作者姓名">
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">是否完结：</td>
+				<td>
+					<span>是</span><input type="radio" id="contactChoice1"name="contact" value="">
+					<span>否</span><input type="radio" id="contactChoice1"name="contact" value="">
+
+				</td>
+				<td class="td_right">入库时间：</td>
+				<td>
+					<input type="button" id="unit" name="unit" class="input-text lh30" size="40" placeholder="" value="默认当前系统时间">
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">商品图片：</td>
+				<td>
+					<input type="file" id="pics" name="pics" class="input-text lh30" size="40" multiple="multiple" onchange="setImagePreviews(this,'showPics')">
+				</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td colspan="5" align="center">
+					<div id="showPics">
+					
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="td_right">书籍简介：</td>
+				<td colspan="5">
+					 <textarea name="intro" id="intro" rows="3" cols="100"></textarea>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="4" align="center">
+					<input type="button" name="button" class="btn btn82 btn_save2" onclick="addGoodsInfo()" value="修改">
+					<input type="reset" name="button" class="btn btn82 btn_res" value="重置">
+				</td>
+			</tr></tbody>
+		</table>
+	</form>
+	<script type="text/javascript">
+	
+	//添加商品
+	function addGoodsInfo(){
+		//获取所有的元素
+		var gname =$("#gname").val();
+		var price =$("#price").val();
+		var balance =$("#balance").val();
+		var unit =$("#unit").val();
+		var qperid =$("#qperid").val();
+		var weight =$("#weight").val();
+		var intro =$("#intro").val();
+		var descr =CKEDITOR.instances.editor1.getData();//获取副编辑器文本数据
+		var tno =$("#goodsType").combobox("getValue");
+		console.log(tno);
+		console.log(descr);
+		
+		$.ajaxFileUpload({
+			url:'../../goodFileUpload.action',
+			secureuri:false,
+			fileElementId:'pics',
+			dataType:'json',
+			data:{tno:tno,gname,price:price,balance,unit:unit,qperied:qperied,
+					weight:weight,intro:intro,descr:descr},
+					
+			successs:function(data,status){
+				if(data.code==1){
+					//在右下角显示对话框  5s后自动消失
+					$.messagr.show({
+						title:'温馨提示',
+						msg:'添加成功',
+						timeout:5000,
+						showType:'slide'
+					});
+				}else{
+					$.messager.alert('警告',"添加失败");
+				}
+			}
+		});
+	}
+	</script>
+</div>
+
+

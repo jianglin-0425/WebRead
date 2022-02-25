@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  servlet.contextpath: /webread
+  session.timeout: 60000
+
+logging:
+  level:
+    com.jl.repository : debug
+spring:
+mybatis:
+  typeAliasesPackage: com.jl.bean
+  mapper-locations: classpath:com/jl/repository/*.xml
+---
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://121.199.28.34:3306/noval?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: a
+    type: com.alibaba.druid.pool.DruidDataSource
+

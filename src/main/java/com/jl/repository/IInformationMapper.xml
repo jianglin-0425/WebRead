@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IInformationDAO">
+
+    <select id="findByiID" resultType="com.jl.bean.Information" >
+        select
+            iID,iType,iAdvice,vid
+        from
+            information
+        order by iID desc;
+    </select>
+
+    <select id="findVOByPage" resultType="com.jl.bean.InformationVO" >
+        select
+            information.*,admin.vName
+        from
+            information
+        INNER join
+            admin
+        on
+            admin.vID=information.vid
+        <if test="info!=null">
+            <where>
+                <if test="info.iType!=null"> and iType like CONCAT('%',#{info.iType,jdbcType=VARCHAR},'%')   </if>
+            </where>
+        </if>
+        order by publishTime desc
+        <if test="count!=null">
+            LIMIT 0,#{count} ;
+        </if>
+    </select>
+
+</mapper>

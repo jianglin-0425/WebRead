@@ -1,0 +1,75 @@
+  
+
+
+<div id="yc_goodtype">
+
+
+
+<!-- 表格显示数据 -->
+<table id="yc_gt_show"></table>
+
+<script type="text/javascript">
+//页面加载时显示所有的商品类型信息到表格中
+	$('#yc_gt_show').datagrid({
+		url:'../../goodstype.action?op=findAll',
+		pagination:true,//显示分页控件
+		pageList:[3,5,7,9],
+		pageSize:3,
+		columns:[[
+					{field:'tno',title:'通知ID',width:200},		        
+					{field:'ttype',title:'通知类型',width:200},		        
+						{field:'tadvice',title:'通知内容',width:670},
+					{field:'aa',title:'操作',width:150,formatter:function(value,row,index){
+						
+							return '<a href="javascript:update('+row.tno+',1)" style="color:green;">删除</a>';
+						
+				}}	        
+		]]
+	});
+
+
+function update(tno,status){
+	$.get("../../goodstype.action",{op:'update',tno,status:status},function(data){
+		if(data.code==1){
+			//修改成功
+			//刷新表格
+			$('#yc_gt_show').datagrid('reload');
+		}else{
+			$.messager.alert('警告','修改失败')
+		}
+	},'json');
+}
+
+
+ //给超链接绑定点击事件
+$("#gt_add .gt_add_btn").click(function(){
+	//进行表单提交
+	$('#gt_add').form('submit',{
+		url:'../../goodstype.action',//配置fresh/goodstype.action x当前页面 fresh/back/manage/goodtype.action	找不到404
+		onSubmit:function(param){
+			param.op='add';
+		},
+		success:function(data){
+			//解析为json对象
+			data=eval('('+data+')');
+			if(data.code==1){
+				//右下角显示对话框 5秒后自动消失
+				$.messager.show({
+					title:'温馨提示',
+					msg:'添加成功',
+					timeout:5000,
+					showType:'slide'
+				});
+			}else{
+				$.messager.alert('警告','添加失败');
+			}
+		}
+		
+	});
+});
+
+</script>
+</div>
+
+
+

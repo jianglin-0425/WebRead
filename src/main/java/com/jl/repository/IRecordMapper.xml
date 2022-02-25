@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IRecordDAO">
+    <insert id="add" parameterType="com.jl.bean.Record" >
+        insert into record values(null,#{userid},#{bid},#{sno},current_timestamp)
+    </insert>
+
+    <select id="find" resultType="com.jl.bean.Record" >
+        select
+            rid,userID,sno,rtime,bid
+        from
+            record
+        where 1=1
+        <if test="userid!=null"> and userid=#{userid}</if>
+        <if test="bid!=null"> and bid=#{bid}</if>
+    </select>
+
+    <delete id="delete" parameterType="com.jl.bean.Record" >
+        delete
+        from
+            record
+        where 1=1
+        <if test="userid!=null"> and userid=#{userid}</if>
+        <if test="sno!=null"> and sno=#{sno}</if>
+        <if test="bid!=null"> and bid=#{bid}</if>
+    </delete>
+
+    <update id="updateTime" parameterType="com.jl.bean.Record">
+        update
+            record
+            <set>
+             <if test="sno!=null">sno=#{sno},rtime = current_timestamp</if>
+
+            </set>
+        where 1=1
+            <if test="userid!=null"> and userid=#{userid}</if>
+            <if test="bid!=null"> and bid=#{bid}</if>
+    </update>
+
+
+    <select id="findRecordVO" resultType="com.jl.bean.BookCaseVO" >
+        select
+            record.bid bid,record.sno sno,bname,btype,authName,sname,rtime,wtime
+		from
+		    record,section,book
+		where 1=1
+		<if test="userid!=null"> and record.userID=#{userid}  </if>
+		     and  record.bid=section.bid
+		     and section.sno=record.sno
+		     and book.bid=record.bid
+		ORDER BY rtime DESC
+    </select>
+
+</mapper>

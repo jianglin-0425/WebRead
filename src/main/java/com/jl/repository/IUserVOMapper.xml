@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IUserVODAO">
+
+    <select id="findUserVO" parameterType="com.jl.bean.UserVO" resultType="com.jl.bean.UserVO">
+        select
+            cid,cart.bid,user.userID,fType,book.btype,state
+        from
+            cart
+			left join
+			    user
+			on
+			    user.userID=cart.UserID
+
+			inner join
+			    book
+			on
+			    cart.bid=book.bid
+		where 1=1
+            <if test="userid!=null">and user.userID= #{userid} </if>
+    </select>
+
+    <update id="updateUserInfo" parameterType="com.jl.bean.UserVO">
+
+    </update>
+
+    <select id="findCollection"  resultType="com.jl.bean.UserVO">
+
+    </select>
+
+    <select id="findLoveBook" parameterType="com.jl.bean.UserVO" resultType="com.jl.bean.UserVO">
+        select bid,bname,btype,authName,intro,img from book  where 1=1
+    </select>
+
+    <select id="getLength" resultType="java.lang.Integer" parameterType="com.jl.bean.User">
+
+    </select>
+</mapper>

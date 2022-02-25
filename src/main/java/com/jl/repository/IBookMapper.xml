@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IBookDAO">
+
+    <insert id="add" parameterType="com.jl.bean.Book"  >
+        insert into book values(null,#{bname},#{authname},#{btype},#{intro},#{img},#{hot});
+    </insert>
+
+    <select id="findOne" resultType="com.jl.bean.Book" >
+        select
+        *
+        from book
+        where 1=1
+        <if test="bid!=null"> and  bid=#{bid} </if>
+    </select>
+
+    <select id="findMany" resultType="com.jl.bean.Book" >
+        select
+        *
+        from book
+        <if test="pageSize!=null and curIndex!=null ">
+            limit #{curIndex} , #{pageSize}
+        </if>
+    </select>
+
+    <select id="findType" resultType="java.lang.String" >
+       select btype from book GROUP BY btype
+    </select>
+
+
+    <select id="findByCondition" resultType="com.jl.bean.Book" >
+        select
+            bid,bname,authname,hot,btype,intro,img
+        from book
+        where 1=1
+        <if test="book!=null">
+            <if test="book.btype!=null"> and btype like CONCAT('%',#{book.btype,jdbcType=VARCHAR},'%')   </if>
+            <if test="book.authname!=null"> and authname like CONCAT('%',#{book.authname,jdbcType=VARCHAR},'%')   </if>
+        </if>
+        <if test="count!=null ">
+            limit 0 , #{count}
+        </if>
+    </select>
+
+    <select id="findByKeys" resultType="com.jl.bean.Book" >
+        select
+        *
+        from book
+        where 1=1
+        <if test="book!=null">
+            <if test="book.btype!=null"> and btype like CONCAT('%',#{book.btype,jdbcType=VARCHAR},'%')   </if>
+            <if test="book.authname!=null"> or authname like CONCAT('%',#{book.authname,jdbcType=VARCHAR},'%')   </if>
+        </if>
+        <if test="count!=null ">
+            limit 0 , #{count}
+        </if>
+    </select>
+
+
+    <select id="findHot" resultType="com.jl.bean.Book" >
+        select
+        *
+        from book
+        order by hot DESC
+        <if test="count!=null ">
+            limit 0 , #{count}
+        </if>
+    </select>
+
+    <select id="findNewBook" resultType="com.jl.bean.Book" >
+        select
+        *
+        from book
+        where 1=1
+
+        <if test="book.btype!=null"> and btype like CONCAT('%',#{book.btype,jdbcType=VARCHAR},'%')   </if>
+
+        order by bid desc;
+        <if test="pageSize!=null and curIndex!=null ">
+            limit #{curIndex} , #{pageSize}
+        </if>
+    </select>
+    <update id="updateHot" parameterType="java.lang.Integer">
+        update book set hot=hot+1 where bid = #{bid}
+    </update>
+    <select id="findChapterNewest" resultType="com.jl.dto.BookDO" >
+         SELECT
+            book.*,a.sname,a.sno,a.wtime
+         from
+         book,
+        (SELECT section.*
+            FROM
+                section
+            INNER JOIN
+                ( SELECT MAX(sno) sno, bid FROM section GROUP BY bid) b
+            where b.sno=section.sno and b.bid=section.bid
+        ) a
+        where
+            a.bid=book.bid
+        <if test="count!=null ">
+            limit 0 , #{count}
+        </if>
+
+    </select>
+
+    <select id="getLength" resultType="java.lang.Integer">
+        select COUNT(bid) length from book
+        <where>
+            <if test="btype!=null"> and btype like CONCAT('%',#{btype,jdbcType=VARCHAR},'%')    </if>
+        </where>
+
+
+    </select>
+
+    <select id="findByPage" resultType="com.jl.bean.Book" >
+        select
+        *
+        from book
+        where 1=1
+
+        <if test="book.btype!=null"> and btype like CONCAT('%',#{book.btype,jdbcType=VARCHAR},'%')   </if>
+
+        <if test="pageIndex!=null and pageSize!=null">
+            <bind name="key_offset" value="(pageIndex)*pageSize"></bind>
+            LIMIT #{key_offset},#{pageSize}
+        </if>
+    </select>
+</mapper>

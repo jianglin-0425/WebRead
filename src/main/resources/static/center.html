@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/biquge.css" />
+		<link rel="stylesheet" href="css/center/index.6b94b.css" />
+		<script type="text/javascript" src="js/jquery-1.10.1.js" ></script>
+		<script type="text/javascript" src="js/push.js" ></script>
+		<script type="text/javascript" src="js/bqg.js" ></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/axios.js" ></script>
+
+		<style type="text/css">
+			.c1{
+	            width: 106px;
+	            height: 106px;
+	            border: 3px solid gainsboro;
+	            border-radius: 50%;
+	            overflow: hidden;
+	        }
+	        .right ul li{
+	        	float: left;
+	        	padding-left: 59px;
+	        }
+	        .right ul li>b{
+	        	font-family: arial;
+			    font-size: 20px;
+			    margin: 0 0 0 8px;
+	        }
+	        #elRecList li{
+	        	width: 30%;
+	        	float: left;
+	        }
+	        .left-title{
+	        	color: rgb(34, 34, 38);
+			    font-size: 16px;
+			    font-weight: 600;
+			    float: left;
+			    width: 84px;
+			    height: 26px;
+	        }
+	        .line-box{
+	        	-webkit-box-flex: 1;
+			    height: 1px;
+			    margin-top: 12px;
+			    flex: 1 1 0%;
+			    background: rgb(229, 229, 229);
+			    width: 601px;
+    			height: 1px;
+	        }
+	        .right-btn {
+			    padding: 0 16px;
+			    text-align: center;
+			    border: 1px solid #108ee9;
+			    border-radius: 13px;
+			    color: #108ee9;
+			    cursor: pointer;
+				width: 70px
+			}
+			.contain .msg-item {
+			    width: 100%;
+			    display: -webkit-box;
+			    display: -ms-flexbox;
+			    display: flex;
+			    margin: 14px 0;
+			    color: #555666;
+			    font-size: 14px;
+			    line-height: 24px;
+			    font-weight: 400;
+			}
+			.contain .msg-item .msg-key {
+			    width: 64px;
+			    text-align: right;
+			    float: left;
+			    word-break: break-all;
+			}
+			.contain .msg-item .msg-val[data-v-165b75c4] {
+			    -webkit-box-flex: 1;
+			    -ms-flex: 1;
+			    flex: 1;
+			    padding-left: 16px;
+			    word-break: break-all;
+			}
+			.info-box {
+			    margin-bottom: 24px;
+			}
+			.info-box header {
+			    width: 100%;
+			    padding-top: 24px;
+			    display: -webkit-box;
+			    display: -ms-flexbox;
+			    display: flex;
+			    overflow: hidden;
+			    line-height: 24px;
+			    font-size: 14px;
+			    font-weight: 400;
+			}
+			.el-form-item {
+			    margin: 16px 0;
+			}
+			.el-form-item__label {
+			    text-align: right;
+			    vertical-align: middle;
+			    float: left;
+			    font-size: 14px;
+			    color: #606266;
+			    line-height: 40px;
+			    padding: 0 12px 0 0;
+			    -webkit-box-sizing: border-box;
+			    box-sizing: border-box;
+			}
+			.el-form-item__content {
+			    line-height: 40px;
+			    position: relative;
+			    font-size: 14px;
+			}
+			.el-form .el-input {
+			    width: 240px;
+			    height: 32px;
+			    line-height: 32px;
+			    margin-right: 16px;
+			}
+			.el-input {
+			    position: relative;
+			    font-size: 14px;
+			    display: inline-block;
+			    width: 100%;
+			}
+			.el-input__inner {
+			    -webkit-appearance: none;
+			    background-color: #fff;
+			    background-image: none;
+			    border-radius: 4px;
+			    border: 1px solid #dcdfe6;
+			    -webkit-box-sizing: border-box;
+			    box-sizing: border-box;
+			    color: #606266;
+			    display: inline-block;
+			    font-size: inherit;
+			    height: 40px;
+			    line-height: 40px;
+			    outline: 0;
+			    padding: 0 15px;
+			    -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+			    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+			    width: 100%;
+			}
+			.el-textarea__inner {
+			    display: block;
+			    resize: vertical;
+			    padding: 5px 15px;
+			    line-height: 1.5;
+			    -webkit-box-sizing: border-box;
+			    box-sizing: border-box;
+			    width: 100%;
+			    font-size: inherit;
+			    color: #606266;
+			    background-color: #fff;
+			    background-image: none;
+			    border: 1px solid #dcdfe6;
+			    border-radius: 4px;
+			    -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+			    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+			}
+			.el-radio{
+				color: #606266;
+			    cursor: pointer;
+			    margin-right: 30px;
+			    font-size: 14px;
+			    position: relative;
+    			display: inline-block;
+        		line-height: 1;
+			    outline: 0;
+			    white-space: nowrap;
+			}
+			.el-radio__input {
+			    cursor: pointer;
+			    vertical-align: middle;
+			    position: relative;
+			    display: inline-block;
+			    line-height: 1;
+			    outline: 0;
+			    white-space: nowrap;
+			}
+			.el-radio__inner {
+			    width: 4px;
+			    height: 4px;
+			    border-radius: 100%;
+			    background-color: #fff;
+			    content: "";
+			    position: absolute;
+			    left: 50%;
+			    top: 50%;
+			    -webkit-transform: translate(-50%,-50%) scale(0);
+			    transform: translate(-50%,-50%) scale(0);
+			    -webkit-transition: -webkit-transform .15s ease-in;
+			    transition: -webkit-transform .15s ease-in;
+			    transition: transform .15s ease-in;
+			    transition: transform .15s ease-in,-webkit-transform .15s ease-in;
+			}
+			.myfile{
+				margin-top: -143px;
+				 margin-left: -1px;
+				 position: absolute;
+				 z-index: 2;
+				 filter: alpha(Opacity=0);
+				 -moz-opacity: 0;
+				 opacity: 0;
+				 width: 140px;
+				 height: 162px;
+				 cursor: pointer;
+			}
+			    
+		</style>
+	</head>
+	<body>
+		<div class="personal-header" data-l1="1">
+            <div class="header-wrapper">
+                <div class="header-logo">
+                    <a href="/">个人中心</a>
+                </div>
+                <ul class="header-nav">
+                    <li class="header-nav-li">
+                        <a href="center.html" class="header-nav-a active" accesskey="1" data-eid="qd_M01"><i class="iconfont icon-home"></i>我的首页</a>
+                    </li>
+                    <li class="header-nav-li" id="headerNav">
+                        <a href="bookshelf.html" class="header-nav-a " accesskey="2" data-eid="qd_M02"><i class="iconfont icon-book"></i>我的书架</a>
+                    </li>
+                    <li class="header-nav-li">
+                        <a href="message.html" class="header-nav-a " accesskey="3" data-eid="qd_M03"><i class="iconfont icon-msg"></i><i class="qdp-unread elUnread dn">未读</i>消息中心</a>
+                    </li>
+				<li class="header-nav-li">
+                        <a href="index.html" class="header-nav-a " accesskey="3" data-eid="qd_M03"><i class="iconfont icon-msg"></i><i class="qdp-unread elUnread dn"></i>阅读网首页</a>
+                    </li>
+                </ul>
+                <a href="/" id="headerLog" class="header-log" data-eid="qd_M06" data-target="headerDropList" @mouseenter="changeActive($event)" @mouseleave="removeActive($event)" >
+                  		 
+                </a>
+				 <img id="avatar_img" style="display:none;height: 85px;width: 150px;border-radius: 50%;margin-right: 20px;">
+           </div>
+           <ul id="headerDropList" class="header-drop" data-align="3-2" style="position: absolute; left: 1157px; top: 70px;">
+ 
+               <li>
+                   <a href="center.html" data-eid="qd_M09">我的主页</a>
+               </li>
+               <li>
+                   <a href="ClientServerCenter.html" target="_blank" data-eid="qd_M10">客服中心</a>
+               </li>
+                <li>
+                   <a href="userGuide.html" target="_blank" data-eid="qd_M10">帮助中心</a>
+               </li>
+               <li>
+                   <a href="javascript:;" id="elLoginOut" @click="outLogin()" data-eid="qd_M11"></a>
+               </li>
+           </ul>
+       	</div>
+		<div id="main" class="qdp-wrapper">
+               <div class="personal-sideBar" data-l1="2">
+                    <ul class="sideBar-group">
+                        <li class="active">
+                        	<a href="index.html" class="sideBar-list-a"><i class="iconfont icon-home"></i>首页</a>
+                        </li>
+                    </ul>
+                    <ul class="sideBar-group">
+                        <li class="">
+                            <a href="ClientServerCenter.html" class="sideBar-list-a" data-eid="qd_M16"><i class="iconfont icon-level"></i>客服中心</a>
+                        </li>
+                    </ul>
+                    
+                    <ul class="sideBar-group">
+                        <li class="">
+                            <a href="userGuide.html" class="sideBar-list-a" data-eid="qd_M16"><i class="iconfont icon-level"></i>帮助中心</a>
+                        </li>
+                    </ul>
+                    
+                    <ul class="sideBar-group">
+                        <li>
+                            <a href="updatePwd.html" class="sideBar-list-a" target="_blank" data-eid="qd_M20"><i class="iconfont icon-safety"></i>修改密码</a>
+                        </li>
+                    </ul>
+                </div>
+			    <div id="q-content" class="qdp-content home-content " data-l1="3" style="width: 777px; margin-left: 213px;">
+			    	<div style="margin-top: 23px;">
+			    		<div class="left"  style="  width:100%;height: 235px; background: #fff url(images/home-index-bg.b2c89.png) no-repeat">
+			    		</div>
+			    		<div class="c1" style="    margin-top: -168px;margin-left: 40px;">
+							<img src="images/100.jfif" style="width: 100%;" src="2.png" alt="" v-if="user.img==null">
+							<img :src="user.img" style="width: 100%;" alt="" v-else>
+						</div>
+			    		<h3 style="float: right;margin-top: -101px;font-size: 20px;  margin-right: 372px;color: white;">书友:{{user.uname}}{{user.userid}}</h3>
+			    		<div class="right"    style="padding: 14px;" >
+			    			<ul>
+			    				<li>我的收藏:<b>&nbsp;0</b></li>
+			    				<li>我的喜好:<b>&nbsp;玄幻</b></li>
+			    				<li>最近阅读类型:<b>&nbsp;玄幻</b></li>
+			    			</ul>
+				    		<div id="qdp_btn" class="qdp-button" style="    margin-left: 550px;">
+				                    <label class="qdp-button-a mlr4" target="_blank" data-eid="qd_M23" onclick="showInfo()">个人主页</label>
+				            </div>	
+			    		</div>
+			    		
+			    	</div>
+			    	<form id="addToShelfForm" action="" class="shelf-recmd qdp-border" method="post" data-l2="1"    style="margin-top: 69px;height: 348px;">
+			            <h2 class="shelf-title">猜你喜欢</h2>
+			        	<div class="novelslist" style="width: 89%;">
+							
+							<div class="content">
+								<h2>玄幻小说</h2>
+								<div class="top">
+									<div class="image"><img src="http://www.xbiquge.la/files/article/image/26/26874/26874s.jpg" alt="沧元图" width="67" height="82"></div>
+									<dl>
+										<dt>
+											<a href="http://www.xbiquge.la/26/26874/">沧元图</a>
+										</dt>
+										<dd>    我叫孟川，今年十五岁，是东宁府    “镜湖道院”的当代大师兄。</dd>
+									</dl>
+									<div class="clear"></div>
+								</div>
+								<ul>
+									<li><a href="http://www.xbiquge.la/42/42450/">镇世武神</a>/剑苍云</li>
+									<li><a href="http://www.xbiquge.la/0/951/">伏天氏</a>/净无痕</li>
+									<li><a href="http://www.xbiquge.la/4/4714/">无敌剑域</a>/青鸾峰上</li>
+									<li><a href="http://www.xbiquge.la/0/10/">武炼巅峰</a>/莫默</li>
+									<li><a href="http://www.xbiquge.la/14/14930/">元尊</a>/天蚕土豆</li>
+									<li><a href="http://www.xbiquge.la/27/27256/">临渊行</a>/宅猪</li>
+									<li><a href="http://www.xbiquge.la/13/13959/">圣墟</a>/辰东</li>
+									<li><a href="http://www.xbiquge.la/25/25129/">左道倾天</a>/风凌天下</li>
+									<li><a href="http://www.xbiquge.la/2/2210/">全职法师</a>/乱</li>
+									<li><a href="http://www.xbiquge.la/14/14591/">斗罗大陆4终极斗罗</a>/唐家三少</li>
+									<li><a href="http://www.xbiquge.la/23/23811/">一剑独尊</a>/青鸾峰上</li>
+									<li><a href="http://www.xbiquge.la/26/26519/">都市极品医神</a>/风会笑</li>
+								</ul>
+							</div>
+							
+							<div class="content">
+								<h2>修真小说</h2>
+							  	<div class="top">
+									<div class="image">
+									<img src="http://www.xbiquge.la/files/article/image/0/218/218s.jpg" alt="我欲封天" width="67" height="82"></div>
+									<dl>
+										<dt>
+											<a href="http://www.xbiquge.la/0/218/">我欲封天</a>
+										</dt>
+										<dd>    我若要有，天不可无。我若要无，天不许有！
+									       	这是一个起始于第八山与第九山之间的故事，一个“我命如妖欲封天”的世界！
+										</dd>
+									</dl>
+									<div class="clear"></div>
+								</div>
+								<ul>
+									<li><a href="http://www.xbiquge.la/10/10489/">三寸人间</a>/耳根</li>
+									<li><a href="http://www.xbiquge.la/1/1693/">诛仙</a>/萧鼎</li>
+									<li><a href="http://www.xbiquge.la/56/56564/">大奉打更人</a>/卖报小郎君</li>
+									<li><a href="http://www.xbiquge.la/9/9785/">剑卒过河</a>/惰堕</li>
+									<li><a href="http://www.xbiquge.la/5/5395/">凡人修仙传</a>/忘语</li>
+									<li><a href="http://www.xbiquge.la/43/43943/">烂柯棋缘</a>/真费事</li>
+									<li><a href="http://www.xbiquge.la/0/844/">蛊真人</a>/蛊真人</li>
+									<li><a href="http://www.xbiquge.la/1/1309/">玄浑道章</a>/误道者</li>
+									<li><a href="http://www.xbiquge.la/15/15977/">大梦主</a>/忘语</li>
+									<li><a href="http://www.xbiquge.la/19/19677/">凡人修仙传仙界篇</a>/忘语</li>
+									<li><a href="http://www.xbiquge.la/45/45793/">我师兄实在太稳健了</a>/言归正传</li>
+									<li><a href="http://www.xbiquge.la/10/10614/">心魔</a>/沁纸花青</li>
+								</ul>
+							</div>
+						</div>
+			    	</form>
+			    	</div>
+				  <div id="main-content" class="qdp-content" data-l1="3" style="width: 776px; display: none; ">
+				        <header data-v-165b75c4="">
+				        	<div data-v-165b75c4="" class="left-title">
+				        		<span data-v-165b75c4="" class="title">账号信息</span> 
+				        		<span data-v-165b75c4="" class="t-icon t-kicon"></span>
+				        	</div> 
+				        	<div style="    margin-top: 27px;" data-v-165b75c4="" class="line-box"></div> 
+				        	<div id="update-con" onclick="showUpdate()" data-v-165b75c4="" style="    float: right;" class="right-btn clearTpaErr right-noa">修改信息</div>
+				        </header>
+				        <div data-v-165b75c4="" class="contain" style="  margin-top: 74px; width: 427px;float: left;margin-left: -65px;">
+				        	<div data-v-165b75c4="" class="msg-item">
+				        		<div data-v-165b75c4="" class="msg-key">ID</div> 
+				        		<div data-v-165b75c4="" class="msg-val">{{user.userid}}</div>
+				        	</div>
+				        	<div data-v-165b75c4="" class="msg-item">
+				        		<div data-v-165b75c4="" class="msg-key">昵称</div> 
+				        		<div data-v-165b75c4="" class="msg-val">
+				        			<span data-v-165b75c4="">{{user.uname}}</span>
+				        		</div>
+				        	</div> 
+				        	<div data-v-165b75c4="" class="msg-item">
+				        		<div data-v-165b75c4="" class="msg-key">简介</div>
+				        		<div data-v-165b75c4="" class="msg-val">
+				        			<span data-v-165b75c4="" v-if="user.uintro==null">暂未添加简介</span>
+				        			<span data-v-165b75c4="" v-else>{{user.uintro}}</span>
+				        		</div>
+				        	</div>
+							<div data-v-165b75c4="" class="msg-item">
+								<div data-v-165b75c4="" class="msg-key">喜欢的类型</div>
+								<div data-v-165b75c4="" class="msg-val">
+									<span data-v-165b75c4="" v-if="user.ftype==null">暂未填写喜欢的类型</span>
+									<span data-v-165b75c4="" v-else>{{user.ftype}}</span>
+								</div>
+							</div>
+
+				        	<div data-v-165b75c4="" class="msg-item">
+				        		<div data-v-165b75c4="" class="msg-key">性别</div> 
+				        		<div data-v-165b75c4="" class="msg-val">
+				        			<span data-v-165b75c4="" v-if="user.sex==null">暂未设置性别</span>
+				        			<span data-v-165b75c4="" v-else>{{user.sex}}</span>
+				        		</div>
+				        	</div>
+				        </div>
+
+			     </div>
+				<div data-v-165b75c4="" class="info-box" style=" float: right; width: 766px;display: none; ">
+					<header data-v-165b75c4="">
+						<div data-v-165b75c4="" class="left-title">
+							<span data-v-165b75c4="" class="title">账号信息</span> 
+							<span data-v-165b75c4="" class="t-icon t-kicon"></span>
+						</div> 
+						<div data-v-165b75c4="" class="line-box">
+						</div>
+						<div data-v-165b75c4="" id="baocun" class="right-btn clearTpaErr right-act" @click="save()">保存</div>
+					</header>
+					<div data-v-165b75c4="" class="contain contain-edit">
+						<form data-v-165b75c4="" class="el-form demo-ruleForm el-form--label-right">
+							<div data-v-165b75c4="" class="el-form-item el-form-item--feedback">
+								<label for="nickname" class="el-form-item__label" style="width: 80px;">账户名</label>
+								<div class="el-form-item__content" style="margin-left: 80px;">
+									<div data-v-165b75c4="" class="el-input">
+										<input type="text" autocomplete="off" placeholder="请设置昵称" v-model="user.uname" class="el-input__inner"  readonly="true">
+									</div> 
+								</div>
+							</div> 
+							<div data-v-165b75c4="" class="el-form-item el-form-item--feedback">
+								<label for="selfdesc" class="el-form-item__label" style="width: 80px;">简介</label>
+								<div class="el-form-item__content" style="margin-left: 80px;">
+									<div data-v-165b75c4="" class="el-textarea">
+										<textarea style="width: 470px;min-height: 150px;" id="text_intro" oninput="font_siz()" autocomplete="off" rows="2" placeholder="请输入内容" maxlength="300" class="el-textarea__inner" style="min-height: 33px;" v-if="user.uintro==null"> </textarea>
+										<textarea style="width: 470px;min-height: 150px;" id="text_intro" oninput="font_siz()" autocomplete="off" rows="2" placeholder="请输入内容" maxlength="300" class="el-textarea__inner" style="min-height: 33px;" v-else>{{user.uintro}}</textarea>
+									</div>
+									<p data-v-165b75c4="" class="desc-num">
+										<span data-v-165b75c4="" class="num">0</span>
+										/300
+									</p>
+								</div>
+							</div>
+
+
+
+							<div data-v-165b75c4="" class="el-form-item el-form-item--feedback" style="margin-top: 0px;">
+								 <div data-v-165b75c4="" class="el-form-item el-form-item--feedback">
+										<label for="sex" class="el-form-item__label" style="width: 80px;">性别</label>
+										<div class="el-form-item__content" style="margin-left: 80px;">
+									
+											<dd>
+			                                    <input type="radio" id="radioSex1" name="gender" data-eid="qd_M139" required="" value="0" checked="">
+			                                    <label for="radioSex1" class="ui-radio mr5"></label><label for="radioSex1" class="mr20">男</label>
+			                                    <input type="radio" id="radioSex2" name="gender" value="1" data-eid="qd_M139" required="" >
+			                                    <label for="radioSex2" class="ui-radio ml5 mr5"></label><label for="radioSex2">女</label>
+			                                </dd>
+										</div>
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+
+		</div>
+		<div class="footer"> 
+		    <div class="footer_link"></div>
+		    <div class="footer_cont">
+				<p>Copyright © 2015-2022 <a href="http://www.xbiquge.la/">新笔趣阁</a> All Rights Reserved.</p>
+				<p>沪ICP备14048333号</p>
+			</div>
+		</div>
+		
+	<script type="text/javascript" src="js/ajaxfileupload.js"></script>	
+	<script type="text/javascript">
+		
+		$("#headerLog").hover(function (e) {
+                $("[id$='headerDropList']").show();
+            }, function () {
+                $("[id$='headerDropList']").hide();
+        });
+		$("#headerDropList").hover(function (e) {
+                $("[id$='headerDropList']").show();
+            }, function () {
+                $("[id$='headerDropList']").hide();
+        });
+        $("#setBase").click(function(){
+				$("#tabTarget1").css("display","block");
+				$("#tabTarget2").css("display","none");
+				$("#2").removeClass("checked");
+				$("#1").addClass("checked");
+				
+				
+			});
+			$("#setImg").click(function(){
+				$("#tabTarget1").css("display","none");
+				$("#tabTarget2").css("display","block");
+				$("#2").addClass("checked");
+				$("#1").removeClass("checked");
+			});
+			
+	
+			$("#sys_head").click(function(){
+				$("#avatarXChoose").css("display","none");
+				$("#avatarXSystem").css("display","block");
+			});
+			$("#sys_cancel").click(function(){
+				$("#avatarXSystem").css("display","none");
+				$("#avatarXChoose").css("display","block");
+			});
+			
+			function font_siz() {
+		    var num = $("#text_intro").val().length;
+		    if(num<140){
+		       
+		   		$(".num").text(num);
+		        
+		    }else{
+		         
+		        $(".num").text(Math.abs(num));
+		    }
+		 	
+		}
+		
+			
+			function showInfo(){
+				$("#q-content").css("display","none");
+				$("#main-content").css("display","block");
+			}
+		
+			function showUpdate(){
+				$("#main-content").css("display","none");
+				$(".info-box").css("display","block");
+			}
+			//图片事件绑定
+		var fileObj = "";
+		var imgData = "";
+		function setImg(){}
+		$("#img").change(function () {
+		    // 构造一个文件渲染对象
+			var reader = new FileReader();
+			// 得到文件列表数组
+			fileObj = $(this)[0].files[0];
+			// 拿到文件数据
+			reader.readAsDataURL(fileObj);
+			reader.onload = function() {
+				// 获取文件信息
+				imgData = reader.result;
+				console.log(imgData);
+				// 指定位置显示图片
+				$("#myImg").attr("src", imgData);		    
+			};
+		});
+		var vm=new Vue({
+			el:'#main',
+			data:{
+				loveBook:{},
+				collection:{},
+				find:{},
+				update:{},
+				user:{}
+			},
+			methods:{
+				save:function(){
+					
+					var intro=$("#text_intro").val()
+					var sex='男' 
+					var i=$('input:radio:checked').val();
+					if(i==1){
+						sex='女'
+					}
+					console.log(i);
+					
+					$.ajaxFileUpload({
+						url:"userFileUpload",
+						secureuri:false,
+						fileElementId:'img',
+						dataType:'json',
+						data:{
+								uintro:intro,
+								sex:sex
+							},
+							success:function(data){
+								console.log(data);
+								alert("保存成功");
+								$(".info-box").css("display","none");
+								$("#q-content").css("display","block");
+							}
+						
+					});	
+					
+				},
+				outLogin:function(){
+					axios({
+						url:'user/OutLogin',
+						method:'post',
+						params:{}
+					}).then(result=>{
+						if(result.data==1){
+							location.reload();	
+						}else{
+							alert('用户登录失败');
+						}
+					});
+				}
+			},
+			mounted:function(){
+				axios.all([CheckLogin(),getMessage()])
+				.then(axios.spread((fn1,fn2)=>{
+					if(!fn1.data.code){
+						alert("您尚未登录,请先进行登录!!!");
+						window.location.href="login.html";
+					}
+					this.user=fn1.data.obj;
+
+					console.log(this.user)
+					if (this.user.img==""||this.user.img==null){
+						this.user.img="images/default.jpg";
+					}
+					console.log(fn1.data);
+
+					$("#headerLog").html("书友&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;"+this.user.uname+"&nbsp;]&nbsp;&nbsp;");
+					console.log(fn1.data);
+					this.loveBook=fn2.data.loveBook;
+					this.collection=fn2.data.collection;
+					this.find=fn2.data.find;
+					console.log(fn2.data);
+				}));
+			}
+			
+		});
+		function CheckLogin(){
+			return axios({
+				url:'user/checkLogin',
+				method:'get',
+				params:{}
+			});
+		}
+		function getMessage(){
+			
+			return axios.get('center/findMessage');
+		}
+	</script>
+	</body>
+	
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>后台管理页面</title>
+<!--css样式  easyuipifu-->
+<link rel="stylesheet" type="text/css" href="../css/easyui.css"/>
+<!--引入图标样式-->
+<link rel="stylesheet" type="text/css" href="../css/icon.css"/>
+<style type="text/css">
+	.yc_menu{
+	list-style: none;
+	width:180px;
+	margin: 0 auto;
+	padding:0px;
+}
+.yc_menu li{
+list-style: none;
+}
+</style>
+<!--引入jquery-->
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<!--引入easyui-->
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<!-- 引入中文警示 -->
+<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+<!--引入ajax文件上传-->
+<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+<!-- 引入副编辑器的js文件 -->
+<script type="text/javascript" src="../../ckeditor/ckeditor.js"></script>
+
+</head>
+<body class="easyui-layout">
+  
+    <div data-options="region:'north'" style="height:100px;"></div>  
+    <div data-options="region:'south'" style="height:50px;"></div>  
+    <div data-options="region:'east',iconCls:'icon-reload',title:'工具类'" style="width:100px;"></div>  
+    <div data-options="region:'west',title:'导航栏'" style="width:200px;">
+    	<!-- 伸缩面板 实现二级级联菜单 -->
+	    <div class="easyui-accordion" data-options="fit:true">
+			<div title="书籍管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:10px;">
+				<ul class="yc_menu">
+				<li>
+					<a href="goodstype.html" class="easyui-linkbutton yc_btn" data-options="iconCls:'icon-search',plain:true">修改书籍</a>
+				</li>
+				<li> 
+					<a    href="goodsadd.html" class="easyui-linkbutton yc_btn" data-options="iconCls:'icon-add',plain:true">书籍入库</a>
+				  
+				  </li>
+				</ul>
+				
+				  	</div>
+			<div title="会员管理" data-options="iconCls:'icon-help'" style="padding:10px;">
+				<ul class="yc_menu">
+				<li>
+					<a href="userAdd.html" class="easyui-linkbutton yc_btn" data-options="iconCls:'icon-search',plain:true">添加会员</a>
+				</li>
+				<li> 
+					<a    href="userUpdate.html" class="easyui-linkbutton yc_btn" data-options="iconCls:'icon-add',plain:true">修改信息</a>
+				  
+				  </li>
+				</ul>
+				
+			</div>
+			<div title="管理员管理" data-options="iconCls:'icon-search'" style="padding:10px;">
+				 <ul class="yc_menu">
+				<li>
+					<a href="adminAdd.html" class="easyui-linkbutton yc_btn" data-options="iconCls:'icon-search',plain:true">添加管理员</a>
+				</li>
+				<li> 
+					<a    href="adminUpdate.html" class="easyui-linkbutton yc_btn" data-options="iconCls:'icon-add',plain:true">修改管理员</a>
+				  
+				  </li>
+				</ul>
+			</div>
+			<div title="入库统计" data-options="iconCls:'icon-help'" style="padding:10px;">
+				<ul class="yc_menu">
+				<li>
+					<a href="manageAdd.html" class="easyui-linkbutton yc_btn" data-options="iconCls:'icon-search',plain:true">查看入库记录</a>
+				</li>
+				</ul>
+			</div>
+			<div title="阅读统计" data-options="iconCls:'icon-help'" style="padding:10px;">
+				<ul class="yc_menu">
+				<li>
+					<a href="readCount.html" class="easyui-linkbutton yc_btn" data-options="iconCls:'icon-search',plain:true">查看阅读统计</a>
+				</li>
+				
+				</ul>
+			</div>
+			<div title="通知管理" data-options="iconCls:'icon-help'" style="padding:10px;">
+				<ul class="yc_menu">
+				<li>
+					<a href="informationAdd.html" class="easyui-linkbutton yc_btn" data-options="iconCls:'icon-search',plain:true">通知管理</a>
+				</li>
+				
+				</ul>
+			</div>
+		</div>
+    
+    
+    
+    
+    
+    
+    </div>  
+    <div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
+    	<div id="yc_show" class="easyui-tabs" data-options="fit:true"></div>
+    
+    </div>  
+ 
+ <script type="text/javascript">
+ 
+ $(function(){
+	 //默认在选项卡中加载欢迎页面
+	 $('#yc_show').tabs('add',{   
+		    title:'首页',   
+		   	href:'welcom.html' , 
+		    fit:true  
+	}); 
+	 
+	 //给链接绑定点击事件 
+	 $(".yc_btn").click(function(){
+	 	//获取当前超链接href属性值 
+	 	var href=$(this).attr('href');
+	 	var name=$(this).text();
+	 	if(  $('#yc_show').tabs('exists',name)   ){
+	 		//选项卡存在 
+	 		$('#yc_show').tabs('select',name) ;
+	 	}else{
+	 		$('#yc_show').tabs('add',{   
+			    title:name,   
+			   	href:href , 
+			    fit:true,
+			    tools:[{
+			    	iconCls:'icon-no',
+			    	handler:function(){
+			    		$('#yc_show').tabs('close',name);   
+			    	}
+			    }]
+		});
+	 		
+	 	}
+	 	return false;
+	 }); 
+	 
+	 
+	 
+ });
+ 
+
+ 
+ </script>
+</body>
+</html>

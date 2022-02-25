@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IBookVODAO">
+    <select id="findMessage" resultType="com.jl.bean.BookVO" >
+        select
+			sno, book.bid bid,sid,bname,authName,btype,intro,img,sname,wtime
+	    from
+	        book,
+	        (
+	        select
+			sno,bid,sid,sname,wtime
+	        from
+	            section
+			where 1=1
+                <if test="bid!=null"> and bid=#{bid} </if>
+			    and sno =
+			        (
+			        select
+			            max(sno) sno
+			        from
+			            section
+			        where 1=1
+                        <if test="bid!=null"> and bid=#{bid} </if>
+			        )
+			) as a
+		where
+		    a.bid=book.bid
+    </select>
+
+    <select id="findChapter" resultType="com.jl.bean.BookVO" >
+        select
+            sid,sno,book.bid bid,sname,btype
+        from
+            section
+        inner join
+            book
+        on
+            book.bid= section.bid
+        where 1=1
+        <if test="bid!=null"> and book.bid=#{bid} </if>
+    </select>
+
+	<select id="findChapterAllNewest" resultType="com.jl.bean.BookVO" >
+		SELECT
+		a.sid sid,sno,a.bid bid,sname,authName,bname,btype
+		from  book,
+		(
+		select
+		section.sid ,sno,section.bid,sname,wtime
+		from
+		section ,
+		(
+		select
+		MAX(sid) sid,bid
+		from
+		section
+		GROUP BY bid
+		) b
+		where
+		section.bid = b.bid and b.sid=section.sid
+		) a
+		where 1= 1
+		<if test="vo!=null">
+			<if test="vo.btype!=null">and btype like CONCAT('%',#{vo.btype,jdbcType=VARCHAR},'%')  </if>
+			and book.bid=a.bid
+		</if>
+		<if test="pageIndex!=null and pageSize!=null">
+			<bind name="key_offset" value="(pageIndex)*pageSize"></bind>
+			LIMIT #{key_offset},#{pageSize}
+		</if>
+
+	</select>
+
+	<select id="findByKeys" resultType="com.jl.bean.BookVO" >
+		select
+		  *
+		from
+		(
+			SELECT
+				a.sid sid,sno,a.bid bid,sname,authName,bname,btype,wtime
+		    from
+		    	book,
+				(
+					select
+						section.sid ,sno,section.bid,sname,wtime
+					from
+						section ,
+						(
+							select
+								MAX(sid) sid,bid
+							from
+								section
+							GROUP BY bid
+						) b
+					where
+						section.bid = b.bid and b.sid=section.sid
+				) a
+			where 1= 1
+
+				and book.bid=a.bid
+		) t
+		where 1=1
+			<if test="book!=null">
+				<if test="book.bname!=null"> and t.bname like CONCAT('%',#{book.bname,jdbcType=VARCHAR},'%')   </if>
+				<if test="book.authname!=null"> or t.authname like CONCAT('%',#{book.authname,jdbcType=VARCHAR},'%')   </if>
+			</if>
+
+	</select>
+
+</mapper>

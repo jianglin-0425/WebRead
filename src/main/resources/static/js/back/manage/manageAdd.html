@@ -1,0 +1,81 @@
+<div id="yc_goodtype">
+<script type="text/javascript">  
+    function qq(value,name){   
+        alert(value+":"+name)   
+    }   
+</script>  
+  
+<input id="ss" class="easyui-searchbox" style="width:300px"  
+        data-options="searcher:qq,prompt:'Please Input Value',menu:'#mm'"></input>  
+           
+<div id="mm" style="width:120px">  
+    <div data-options="name:'all',iconCls:'icon-ok'">入库书名</div>  
+    <div data-options="name:'sports'">入库ID</div>  
+</div> 
+
+
+<!-- 表格显示数据 -->
+<table id="yc_gt_show"></table>
+
+<script type="text/javascript">
+//页面加载时显示所有的商品类型信息到表格中
+	$('#yc_gt_show').datagrid({
+		url:'../../goodstype.action?op=findAll',
+		pagination:true,//显示分页控件
+		pageList:[3,5,7,9],
+		pageSize:3,
+		columns:[[
+					{field:'mno',title:'入库ID',width:200},		        
+					{field:'mname',title:'入库书名',width:200},		        
+						{field:'mauthor',title:'入库作者',width:200},
+						{field:'mtype',title:'入库类型',width:200},
+						{field:'mtime',title:'入库时间',width:200}
+		]]
+	});
+
+
+function update(tno,status){
+	$.get("../../goodstype.action",{op:'update',tno,status:status},function(data){
+		if(data.code==1){
+			//修改成功
+			//刷新表格
+			$('#yc_gt_show').datagrid('reload');
+		}else{
+			$.messager.alert('警告','修改失败')
+		}
+	},'json');
+}
+
+
+ //给超链接绑定点击事件
+$("#gt_add .gt_add_btn").click(function(){
+	//进行表单提交
+	$('#gt_add').form('submit',{
+		url:'../../goodstype.action',//配置fresh/goodstype.action x当前页面 fresh/back/manage/goodtype.action	找不到404
+		onSubmit:function(param){
+			param.op='add';
+		},
+		success:function(data){
+			//解析为json对象
+			data=eval('('+data+')');
+			if(data.code==1){
+				//右下角显示对话框 5秒后自动消失
+				$.messager.show({
+					title:'温馨提示',
+					msg:'添加成功',
+					timeout:5000,
+					showType:'slide'
+				});
+			}else{
+				$.messager.alert('警告','添加失败');
+			}
+		}
+		
+	});
+});
+
+</script>
+</div>
+
+
+

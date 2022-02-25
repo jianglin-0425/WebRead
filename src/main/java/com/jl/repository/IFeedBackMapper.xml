@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IFeedBackDAO">
+
+    <insert id="add" parameterType="com.jl.bean.FeedBack">
+        insert into feedback values(null,#{userid},#{title},#{content},current_timestamp)
+    </insert>
+
+    <select id="find" parameterType="com.jl.bean.FeedBack" resultType="com.jl.bean.FeedBack">
+        select
+            fid, userID,title,content,wtime
+        from
+            feedback
+        where 1=1
+        <if test="fid!=null"> and fid = #{fid}</if>
+        <if test="userid!=null"> and userid=#{userid}</if>
+        order by wtime desc
+    </select>
+
+    <delete id="delete" parameterType="com.jl.bean.FeedBack">
+        delete
+        from
+            feedback
+        where 1=1
+        <if test="fid!=null"> and fid = #{fid}</if>
+    </delete>
+
+    <select id="findVO" parameterType="com.jl.bean.FeedBackVO" resultType="com.jl.bean.FeedBackVO">
+        select
+            feedback.fid fid,userID,admin.vid vID,
+            vname ,title,content, message,wtime,replytime
+		from
+		    feedback,
+		    message,
+		    admin
+		where 1=1
+        <if test="userid!=null"> and userid=#{userid}</if>
+			and message.fid=feedback.fid
+			and admin.vID=message.vid
+        order by replytime desc
+    </select>
+
+    <select id="findByPage"  resultType="com.jl.bean.FeedBackVO">
+        SELECT
+            feedback.*,`user`.uname
+        from
+            feedback
+        INNER join
+            user
+        on
+            `user`.userID=feedback.userID
+        <where>
+            <if test="feedBack.title!=null"> and title like CONCAT('%',#{title,jdbcType=VARCHAR},'%')    </if>
+        </where>
+
+        order by wtime DESC
+
+        <if test="pageIndex!=null and pageSize!=null">
+            <bind name="key_offset" value="(pageIndex)*pageSize"></bind>
+            LIMIT #{key_offset},#{pageSize}
+        </if>
+    </select>
+
+</mapper>

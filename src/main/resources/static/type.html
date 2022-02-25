@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/biquge.css" />
+		<script type="text/javascript" src="js/jquery-1.10.1.js" ></script>
+		<script type="text/javascript" src="js/push.js" ></script>
+		<script type="text/javascript" src="js/bqg.js" ></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/qs.js" ></script>
+		<script type="text/javascript" src="js/axios.js" ></script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="ywtop">
+				<div class="ywtop_con">
+					<div class="ywtop_sethome">
+						<a href="#">将笔趣阁快捷方式保存到桌面</a>
+					</div>
+					<div class="ywtop_addfavorite">
+						<a href="#" onclick="javascript:window.external.addFavorite('http://www.xbiquge.la','新笔趣阁_书友最值得收藏的网络小说阅读网')">收藏新笔趣阁</a>
+					</div>
+					<div class="nri">
+						<form name="frmlogin" id="frmlogin" method="post" class="show" >
+							<div class="ccc"v-if="user==null">
+								<div class="txtt" >
+									<a href="login.html">登录</a>
+								</div>
+								<div class="txtt"><a href="register.html">用户注册</a></div>
+							</div>
+						</form>
+						<div v-if="user!=null ">
+							Hi,&nbsp;&nbsp;{{user.uName}}&nbsp;&nbsp;
+							<a href="#" target="_top">个人中心</a>
+							|
+							<a href="#" @click="outLogin()">退出登录</a>
+							&nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="header">
+				<div class="header_logo">
+					<a href="index.html" style="background-image: url(images/logo.png);">阅览阁</a>
+				</div>
+				<div class="header_search">
+				<!-- 	<form name="form" id="sform">
+						<input type="text" value="可搜书名和作者，请您少字也别输错字。" name="searchkey" class="search" id="wd" baidusug="2" autocomplete="off">			
+						<button id="sss"> 搜 索 </button>
+					</form> -->
+					
+				</div>
+				<div class="userpanel">
+					&nbsp;
+					<font color="red">留言: </font>
+					<a rel="nofollow" href="feedBack.html?title=求书加书">
+						<font color="red">求书加书</font>
+					</a>
+					,
+					<a rel="nofollow" href="feedBack.html?title=意见反馈">意见反馈</a>
+					&nbsp;
+					<a rel="nofollow" href="ClientServerCenter.html">联系我们</a>
+					&nbsp;
+					&nbsp;
+					<a rel="nofollow" href="feedBack.html?title=书籍反馈">书籍反馈</a>
+				</div>
+			</div>
+			<div class="nav">
+				<ul>
+					<li><a href="index.html">首页</a></li>
+					<li><a href="bookshelf.html">我的书架</a></li>
+					<li><a href="type.html?type=玄幻">玄幻小说</a></li>
+					<li><a href="type.html?type=修真">修真小说</a></li>
+					<li><a href="type.html?type=都市">都市小说</a></li>
+					<li><a href="type.html?type=穿越">穿越小说</a></li>
+					<li><a href="type.html?type=网游">网游小说</a></li>
+					<li><a href="type.html?type=科幻">科幻小说</a></li>
+					<li><a href="rank.html">排行榜单</a></li>
+				</ul>
+			</div>
+			<div class="dahengfu" style="margin-bottom:0;"></div>
+			<div id="main">
+			    <div id="content">
+				<div id="hotcontent">
+					<div class="ll">
+				    	<div class="item" v-for="h in top ">
+							<div class="image">
+								<a :href="'book.html?bid='+h.bid"><img :src="h.img" :alt="h.bname" width="120" height="150"></a>
+							</div>
+							<dl>
+					           <dt>
+					           		<span>{{h.authName}}</span>
+					           		<a :href="'book.html?bid='+h.bid">{{h.bname}}</a>
+					           </dt>
+					           <dd>  
+					           {{h.intro}}  
+					           </dd>
+					        </dl>
+							<div class="clear"></div>
+						</div>
+				
+				    </div>
+				</div>
+				
+				
+				<div id="newscontent">
+				<div class="l">
+				<h2>好看的玄幻小说最近更新列表</h2>
+				<ul>
+				
+					<li v-for="l in left">
+						<span class="s2">《
+							<a :href="'book.html?bid='+l.bid" target="_blank">{{l.bname}}</a>》
+						</span>
+						<span class="s3">
+							<a :href="'content.html?bid='+l.bid+'&sno='+l.sno" target="_blank">{{l.sname}}</a>
+						</span>
+						<span class="s5">{{l.authName}}</span>
+					</li>
+					
+				
+				</ul>
+				
+				<div class="page_b">
+				<table style=""><tbody><tr><td><div class="pagelink" id="pagelink"><em id="pagestats">1/603</em><a href="http://www.xbiquge.la/fenlei/1_1.html" class="first">1</a><a href="http://www.xbiquge.la/fenlei/1_1.html" class="pgroup">&lt;&lt;</a><strong>1</strong><a href="http://www.xbiquge.la/fenlei/1_2.html">2</a><a href="http://www.xbiquge.la/fenlei/1_3.html">3</a><a href="http://www.xbiquge.la/fenlei/1_4.html">4</a><a href="http://www.xbiquge.la/fenlei/1_5.html">5</a><a href="http://www.xbiquge.la/fenlei/1_6.html">6</a><a href="http://www.xbiquge.la/fenlei/1_2.html" class="next">&gt;</a><a href="http://www.xbiquge.la/fenlei/1_603.html" class="ngroup">&gt;&gt;</a><a href="http://www.xbiquge.la/fenlei/1_603.html" class="last">603</a><kbd><input name="page" type="text" size="4" maxlength="6" onkeydown="if(event.keyCode==13){window.location='http://www.xbiquge.la/fenlei/1_<{$page}>.html'.replace('<{$page|subdirectory}>', '/' + Math.floor(this.value / 1000)).replace('<{$page}>', this.value); return false;}"></kbd></div>
+				</td></tr></tbody></table>
+				</div>
+				</div>
+				<div class="r">
+				<h2>好看的玄幻小说</h2>
+				<ul>
+					<li v-for="r in right">
+						<span class="s2">
+							<a :href="'book.html?bid='+r.bid">{{r.bname}}</a>
+						</span>
+						<span class="s5">{{r.authName}}</span>
+					</li>
+				</ul>
+				<div class="page_b page_b2">喜欢就收藏我们</div>
+				</div>
+				<div class="clear"></div></div>
+				</div>
+				</div>		
+			</div>
+		<div class="dahengfu"></div>
+		<div class="footer"> 
+		    <div class="footer_link"></div>
+		    <div class="footer_cont">
+				<p>Copyright © 2015-2022 <a href="http://www.xbiquge.la/">新笔趣阁</a> All Rights Reserved.</p>
+				<p>沪ICP备14048333号</p>
+			  </div>
+		</div>
+		<script type="text/javascript">
+		var urls=window.location.href.split("?")[1].split("&");
+		var type=urls[0].split("=")[1];
+		var vm=new Vue({
+			el:'#wrapper',
+			data:{
+				top:{},
+				right:{},
+				left:{},
+				user:{}
+			},
+			methods:{
+				outLogin:function(){
+					axios({
+						url:'user.action',
+						method:'post',
+						params:{op:'OutLogin'}
+					}).then(result=>{
+						if(result.data==1){
+							location.reload();	
+						}else{
+							alert('用户登录失败');
+						}
+					});
+				}
+			},
+			mounted:function(){
+				axios.all([findInfo(),CheckLogin()])
+				.then(axios.spread((fn1,fn2)=>{
+					console.log(fn1.data);
+					this.top=fn1.data.obj.top;
+					this.left=fn1.data.obj.left;
+					this.right=fn1.data.obj.right;
+					this.user=fn2.data;
+
+				}));
+			}
+			
+		});
+		function findInfo(){
+			type=decodeURI(type);
+			//return axios.get('book/findType&btype='+type+'&index=1');
+			return axios({
+				url:'bookinfo/findbyType',
+				method:'get',
+				params:{btype:type,index:1}
+			});
+		}
+		function CheckLogin(){
+			return axios({
+				url:'user/checkLogin',
+				method:'get',
+				params:{}
+			});
+		}
+		</script>
+	</body>
+</html>

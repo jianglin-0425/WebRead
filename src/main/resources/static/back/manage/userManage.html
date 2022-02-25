@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>【笔趣阁】——后台管理系统</title>
+        <meta content="Admin Dashboard" name="description" />
+        <meta content="Mannatthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+
+    </head>
+
+
+    <body class="fixed-left">
+  <div id="userManage">
+        <!-- Loader -->
+        <div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="left side-menu">
+                <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+                    <i class="ion-close"></i>
+                </button>
+
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> Weread</a>
+                        <!-- <a href="index.html" class="logo"><img src="../assets/images/logo.png" height="24" alt="logo"></a> -->
+                    </div>
+                </div>
+
+                <div class="sidebar-inner slimscrollleft">
+
+                    <div id="sidebar-menu">
+                        <ul>
+
+                            <li>
+                                <a href="index.html" class="waves-effect"><i class="mdi mdi-airplay"></i><span> 首页</span></a>
+                            </li>
+                            <li>
+                                <a href="userManage.html" class="waves-effect"><i class="mdi mdi-swap-horizontal"></i><span> 用户管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="bookManage.html" class="waves-effect"><i class="mdi mdi-wallet"></i><span> 书籍管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="news.html" class="waves-effect"><i class="mdi mdi-chart-areaspline"></i><span> 反馈信息 </span></a>
+                            </li>                           
+                            <li>
+                                <a href="checkVisit.html" class="waves-effect"><i class="mdi mdi-settings"></i><span> 阅读统计 </span></a>
+                            </li>
+                            <li>
+                                <a href="changePwd.html" class="waves-effect"><i class="mdi mdi-power"></i><span> 修改密码 </span></a>
+                            </li>
+                            <li>
+                                <a href="logout.html" class="waves-effect"><i class="mdi mdi-power"></i><span> 退出 </span></a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div> <!-- end sidebarinner -->
+            </div>
+            <!-- Left Sidebar End -->
+
+            <!-- Start right Content here -->
+
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+
+                    <!-- Top Bar Start -->
+                    <div class="topbar">
+
+                        <nav class="navbar-custom">
+
+                            <ul class="list-inline float-right mb-0">
+                                
+                                <li class="list-inline-item dropdown 通知-list">
+                                    <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
+                                       aria-haspopup="false" aria-expanded="false">
+                                        <img src="../assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right 个人资料-dropdown ">
+                                        <!-- item-->
+                                        <div class="dropdown-item noti-title">
+                                            <h5>欢迎</h5>
+                                        </div>
+                                        <a class="dropdown-item" href="index.html"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> 个人资料</a>
+                                        <a class="dropdown-item" href="bookManage.html"><i class="mdi mdi-wallet m-r-5 text-muted"></i> 书籍管理</a>
+                                        <a class="dropdown-item" href="news.html"><span class="badge badge-success float-right"></span><i class="mdi mdi-settings m-r-5 text-muted"></i> 反馈信息</a>
+                                        
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="logout.html"><i class="mdi mdi-登出 m-r-5 text-muted"></i> 登出</a>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                            <ul class="list-inline menu-left mb-0">
+                                <li class="float-left">
+                                    <button class="button-menu-mobile open-left waves-light waves-effect">
+                                        <i class="mdi mdi-menu"></i>
+                                    </button>
+                                </li>
+                                
+                            </ul>
+
+                            <div class="clearfix"></div>
+
+                        </nav>
+
+                    </div>
+                    <!-- Top Bar End -->
+
+                    <div class="page-content-wrapper ">
+
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="page-title-box">
+                                            <div class="btn-group float-right">
+                                                <ol class="breadcrumb hide-phone p-0 m-0">
+                                                    <li class="breadcrumb-item"><a href="#">首页</a></li>
+                                                    <li class="breadcrumb-item active">用户管理</li>
+                                                </ol>
+                                            </div>
+                                            <h4 class="page-title">用户管理</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end page title end breadcrumb -->
+                            <div class="row">
+                                <div class="col-md-12 col-xl-6">
+                                    <div class="card m-b-30">                                
+                                        <div class="card-body new-user">
+                                            <h5 class="header-title mb-4 mt-0">用户列表</h5>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover mb-0" >
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="border-top-0">头像</th>
+                                                            <th class="border-top-0">用户名</th>
+                                                            <th class="border-top-0">性别</th>                                    
+                                                            <th class="border-top-0">用户id</th>
+                                                            <th class="border-top-0">喜爱的小说类型</th>
+                                                            <th class="border-top-0">操作</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                       
+                                                        
+                                                        <tr v-for=" u in userlist">
+                                                            <td>
+                                                                    <img src="../assets/images/coins/dash.png" alt="" style="width:30px">
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:void(0);">{{u.uname}}</a>
+                                                            </td>
+                                                            
+                                                            <td>{{u.sex}}</td>
+                                                            <td>{{u.userid}}</td>
+                                                            <td>{{u.ftype}}</td>
+                                                            <td>
+                                                               <!-- <ul class="list-unstyled list-inline">
+                                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-bitcoin text-primary"></i></a></li>                                                    
+                                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-medium text-danger"></i></a></li>
+                                                                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter text-info"></i></a></li>
+                                                                </ul>-->
+                                                                <a href="" class="btn btn-danger btn-block" @click="del">删除用户
+                                                                	
+                                                                </a>
+                                                            </td>
+                                                            
+                                                       </tr>  
+                                                    </tbody>
+                                                </table>
+                                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>     
+								
+                                    <div class="col-md-12 col-xl-6">
+                                        
+                                        <div class="card m-b-30">                                
+                                            <div class="card-body new-user">
+                                                <h5 class="header-title mb-4 mt-0">管理员列表</h5>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="border-top-0">头像</th>
+                                                                <th class="border-top-0">管理员id</th>                                  
+                                                                <th class="border-top-0">用户名</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr v-for=" a in adminList">
+                                                                <td>
+                                                                	<img src="../assets/images/coins/dash.png" alt="" style="width:30px">
+                                                                </td>
+                                                                <td>{{a.vid}}</td>
+                                                                <td>
+                                                                    <a href="javascript:void(0);">{{a.vname}}</a>
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                           
+                                                        </tbody>
+                                                    </table>
+                                                    
+                                                </div>
+                                            </div>
+                                    
+                                </div>
+                        </div><!-- container -->
+
+                    </div> <!-- Page content Wrapper -->
+
+                </div> <!-- content -->
+
+                <footer class="footer">
+                    © 2020 Weread 
+                </footer>
+
+            </div>
+            <!-- End Right content here -->
+
+        </div>
+        	</div>
+        	</div>
+        <!-- END wrapper -->
+ </div>
+
+        <!-- jQuery  -->
+         <script src="../assets/js/qs.js"></script>
+        <script src="../assets/js/vue.js"></script>
+        <script src="../assets/js/axios.js"></script>
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/popper.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/modernizr.min.js"></script>
+        <script src="../assets/js/detect.js"></script>
+        <script src="../assets/js/fastclick.js"></script>
+        <script src="../assets/js/jquery.slimscroll.js"></script>
+        <script src="../assets/js/jquery.blockUI.js"></script>
+        <script src="../assets/js/waves.js"></script>
+        <script src="../assets/js/jquery.nicescroll.js"></script>
+        <script src="../assets/js/jquery.scrollTo.min.js"></script>
+		
+        <script src="../assets/plugins/metro/metro.js"></script>
+        <!-- App js -->
+        <script src="js/MyTest.js"></script>
+        <script src="../assets/js/app.js"></script>
+    
+		 <script type="text/javascript">
+		 var page =1;
+		 var rows=10;
+		 var vm=new Vue({
+				el:'#userManage',
+				data:{
+					userlist:{},
+					adminList:{},
+					ID:{},
+                    admin:{}
+				},
+				methods:{
+					del:function(){
+						bid=this.bid,
+						console.log(this.bid);
+						if(!bid){
+						 		 alert("删除失败");
+						 		 return;
+  					  }else{
+  						axios({
+	    					  url:'../../userManage.action',
+	    					  method: 'post',
+	    					  responseType: 'text', 
+	    					  params:{
+	    						  op:'del',
+	    						  ID:this.ID
+	    					  }
+	    					}).then(res => {
+	    					  console.log('请求结果：', res);
+	    					  alert("删除成功");
+	    					})
+	  					  }
+					}
+				},
+				mounted:function(){
+					axios.all([getUser(),getAdmin(),checkLogin()])
+					.then(axios.spread((fn1,fn2,fn3)=>{
+						/*this.hot=fn1.data;
+						this.main=fn2.data;
+						console.log(this.hot);
+						console.log(this.main);
+						*/
+                        if (fn3.data.code){
+                            this.admin=fn3.data.obj;
+                        }else{
+                            location.href="../login.html";
+                        }
+                        console.log(fn1);
+                        console.log(fn2);
+
+						this.userlist=fn1.data.obj;
+						this.adminList=fn2.data.obj;
+					}));
+				}
+				
+			});
+			function getAdmin(){
+				return axios.get('../../admin/findAdmin');
+			}
+			function getUser(){
+
+                return axios({
+                    url:'../../user/finduser',
+                    method:'get',
+                    params:{
+                        pageSize:5,
+                        pageIndex:0
+                    }
+                });
+			}
+             function checkLogin(){
+                 return axios.get('../../admin/checkLogin');
+             }
+		</script>
+    </body>
+</html>

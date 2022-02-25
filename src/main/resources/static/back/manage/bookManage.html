@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>【阅读网】——后台管理系统</title>
+        <meta content="Admin Dashboard" name="description" />
+        <meta content="Mannatthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+        
+        
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		
+		
+		
+		<style>
+			.abc{
+				background-color: lightsteelblue;
+			}
+            .signal{
+                background-color: lavenderblush;
+            }
+		</style>
+	
+    </head>
+
+
+    <body class="fixed-left">
+<div id= "bookManage">
+        <!-- Loader -->
+        <div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="left side-menu">
+                <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+                    <i class="ion-close"></i>
+                </button>
+
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> Weread</a>
+                        <!-- <a href="index.html" class="logo"><img src="../assets/images/logo.png" height="24" alt="logo"></a> -->
+                    </div>
+                </div>
+
+                <div class="sidebar-inner slimscrollleft">
+
+                    <div id="sidebar-menu">
+                        <ul>
+
+                            <li>
+                                <a href="index.html" class="waves-effect"><i class="mdi mdi-airplay"></i><span>首页</span></a>
+                            </li>
+                            <li>
+                                <a href="userManage.html" class="waves-effect"><i class="mdi mdi-swap-horizontal"></i><span>用户管理</span></a>
+                            </li>
+                            <li>
+                                <a href="bookManage.html" class="waves-effect"><i class="mdi mdi-wallet"></i><span> 书籍管理 </span></a>
+                            </li>
+                            <li>
+                                <a href="news.html" class="waves-effect"><i class="mdi mdi-chart-areaspline"></i><span> 反馈信息 </span></a>
+                            </li>                          
+                            <li>
+                                <a href="checkVisit.html" class="waves-effect"><i class="mdi mdi-settings"></i><span> 阅读统计</span></a>
+                            </li>
+                            <li>
+                                <a href="changePwd.html" class="waves-effect"><i class="mdi mdi-power"></i><span> 修改密码 </span></a>
+                            </li>
+                            <li>
+                                <a href="logout.html" class="waves-effect"><i class="mdi mdi-power"></i><span> 退出 </span></a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div> <!-- end sidebarinner -->
+            </div>
+            <!-- Left Sidebar End -->
+
+            <!-- Start right Content here -->
+
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+
+                    <!-- Top Bar Start -->
+                    <div class="topbar">
+
+                        <nav class="navbar-custom">
+
+                            <ul class="list-inline float-right mb-0">
+                                <!-- language-->
+                                
+                                <li class="list-inline-item dropdown 通知-list">
+                                    <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
+                                       aria-haspopup="false" aria-expanded="false">
+                                        <img src="../assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right 个人资料-dropdown ">
+                                        <!-- item-->
+                                        <div class="dropdown-item noti-title">
+                                            <h5>欢迎</h5>
+                                        </div>
+                                        <a class="dropdown-item" href="index.html"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> 个人资料</a>
+                                        <a class="dropdown-item" href="bookManage.html"><i class="mdi mdi-wallet m-r-5 text-muted"></i> 书籍管理</a>
+                                        <a class="dropdown-item" href="news.html"><span class="badge badge-success float-right"></span><i class="mdi mdi-settings m-r-5 text-muted"></i> 反馈信息</a>
+                                        
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="logout.html"><i class="mdi mdi-登出 m-r-5 text-muted"></i> 登出</a>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                            <ul class="list-inline menu-left mb-0">
+                                <li class="float-left">
+                                    <button class="button-menu-mobile open-left waves-light waves-effect">
+                                        <i class="mdi mdi-menu"></i>
+                                    </button>
+                                </li>
+                                <li class="hide-phone app-search">
+                                    <form role="search" class="">
+                                        <input type="text" placeholder="请搜索小说书名..." class="form-control" v-model="name" >
+                                        <!-- 按钮触发模态框 -->
+                                        <button class="btn btn-primary btn-lg"   style="    font-size: 1px;position: absolute;margin-top: -28px;margin-left: 153px;height: 25px;padding: 5px;" type="button" @click="button">
+                                            搜索
+                                        </button>
+															<!-- 模态框（Modal） -->
+															
+                                    </form>
+                                </li>
+                            </ul>
+
+                            <div class="clearfix"></div>
+
+                        </nav>
+
+                    </div>
+                    <!-- Top Bar End -->
+
+                    <div class="page-content-wrapper ">
+
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="page-title-box">
+                                        <div class="btn-group float-right">
+                                            <ol class="breadcrumb hide-phone p-0 m-0">
+                                                <li class="breadcrumb-item"><a href="#">首页</a></li>
+                                                <li class="breadcrumb-item active">书籍管理</li>
+                                            </ol>
+                                        </div>
+                                        <h4 class="page-title">书籍管理</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end page title end breadcrumb -->
+                            
+                            <div class="row">   
+                                <div class="col-md-12 col-xl-12">
+                                        <div class="card m-b-30">                                
+                                            <div class="card-body new-user">
+                                                <h5 class="header-title mb-4 mt-0">书架</h5>
+                                                
+                                                <div class="table-responsive">
+                                                	
+                                                    <table class="table table-hover mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="border-top-0">图书</th>
+                                                                <th class="border-top-0">书名</th>
+                                                                <th class="border-top-0">点击次数</th>                                    
+                                                                <th class="border-top-0">作者</th>
+                                                                <th class="border-top-0">小说类型</th>
+                                                                <th class="border-top-0">简介</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          
+                                                            <tr v-for="b in books">
+                                                                <td >
+                                                                        <img :src="b.img" alt="" style="width:30px">
+                                                                </td><td>
+                                                                    <a href="javascript:void(0);">{{b.bname}}</a>
+                                                                </td>
+                                                                
+                                                                <td>{{b.hot}}</td>
+                                                                <td>{{b.authname}}</td>
+                                                                <td>{{b.btype}}</td>
+                                                                
+                                                            <td>
+                                                           		<!-- 按钮触发模态框 -->
+															<button class="btn btn-primary btn-lg" @Click="showIntro(b)" data-toggle="modal"  data-target="#myModal" style="font-size:10px; width:106px" >
+																点击显示简介
+															</button>
+															<!-- 模态框（Modal） -->
+															<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																<div class="modal-dialog">
+																	<div class="modal-content">
+																		<div class="modal-header">
+                                                                            <span>《{{introName}}》简介:</span>
+																			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+																				&times;
+																			</button>
+																			<h4 class="modal-title" id="myModalLabel">
+
+																			</h4>
+																		</div>
+																		<div class="modal-body">
+																			{{bintro}}
+																		</div>
+																		
+																	</div><!-- /.modal-content -->
+																</div><!-- /.modal -->
+															</div>
+                                                           </td>
+
+                                                                <td>
+
+                                                                </td>
+                                                                <td>
+                                                                        <div data-role="countdown" data-hours="300" style="width:70px"></div>
+                                                                </td>
+                                                            </tr>
+                                                           
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                    
+                                                </div>
+                                            </div>  
+                                            <!-- Bootstrap分页-->
+                                            <ul class="pagination pagination-lg" style="margin-left: 400px;">
+												    <li ><a  href="#">&laquo;</a></li>
+												    <li ><a href="#" >{{pageNo}}</a></li>
+												    <li><a href="#" >{{pageNo++}}</a></li>
+												    <li><a href="#" >{{pageNo}}</a></li>
+												    <li><a href="#">&raquo;</a></li>
+												</ul>
+                                </div> 
+                                
+                            </div> <!-- end row -->
+
+                            <div class="row">
+                                <div class="col-md-12 col-xl-6">
+                                    <div class="card m-b-30">
+                                        <div class="card-body">
+                                            <h4 class="mt-0 header-title">上架图书</h4>                                            
+                                            <form class="form-horizontal" role="form">
+                                                <div class="form-group mb-0 row">
+                                                	<div class="col-md-12">
+                                                       
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text bg-light" id="basic-addon1" style="width: 85px;">小说名</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="请输入您要上架的小说名" aria-label="请输入您要上架的小说名" aria-describedby="basic-addon1" style="width: 352px; margin-left: 90px;margin-top: -30px;" v-model="bname">
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text bg-light" id="basic-addon5" style="width: 85px;">类型</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="请输入小说类型" aria-label="请输入小说类型" aria-describedby="basic-addon1" style="width: 352px; margin-left: 90px;margin-top: -30px;" v-model="btype">
+                                                            
+                                                        </div>                                                        
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text bg-light" id="basic-addon5" style="width: 85px;">作者</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="请输入小说作者" aria-label="请输入小说作者" aria-describedby="basic-addon1" style="width: 352px; margin-left: 90px;margin-top: -30px;" v-model="authName">
+                                                            
+                                                        </div>                                                        
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text bg-light" id="basic-addon5" style="width: 85px;">简介</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="请编辑小说简介" aria-label="请编辑小说简介" aria-describedby="basic-addon1" style="width: 353px; margin-left: 90px;margin-top: -30px;" v-model="intro">
+                                                            
+                                                        </div>                                                        
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text bg-light" id="basic-addon5" style="width: 85px;">封面</span>
+                                                            </div>
+                                                            <div class="input-group-append">
+                                                                <!--<span class="input-group-text bg-light" id="basic-addon6">点击上传</span> -->
+                                                            	<span class="input-group-txt bg-light" id="basic-addon6"><input type="file" class="input-text lh30" size="50" multiple="multiple" onchange="setImagePreviews(this,'showPics')" style="width: 265px; margin-left: 90px;margin-top: -26px;"></span>
+                                                            </div>
+                                                        </div>                                                        
+                                                    </div>
+                                                    <div class="col-md-3 mt-3 ml-auto">
+                                                        <a href="#" class="btn btn-success btn-block" @click="add">上架</a>
+                                                    </div>
+                                                </div> <!--end row-->           
+                                            </form>     
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-xl-6">
+                                    <div class="card m-b-30">
+                                        <div class="card-body" style=" height: 300px;">
+                                            <h4 class="mt-0 header-title">下架图书</h4>                                            
+                                            <form class="form-horizontal" role="form">
+                                                <div class="form-group mb-0 row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group mt-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text bg-light" id="basic-addon7"style="width: 85px;">小说id</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" placeholder="请输入您要下架的小说id" aria-label="请输入您要下架的小说ID" aria-describedby="basic-addon1" style="width: 352px; margin-left: 90px;margin-top: -30px;"v-model="bid">
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                    <div class="col-md-3 mt-3 ml-auto">
+                                                        <a href="#" class="btn btn-danger btn-block" style="    margin-top: 164px;" @click="del">下架</a>
+                                                    </div>
+                                                </div> <!--end row-->           
+                                            </form>     
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- end row --> 
+                            <div class="row">
+                                <div class="col-md-6 col-xl-3">   
+                                </div>
+                            </div> <!-- end row -->
+
+                        </div><!-- container -->
+
+                    </div> <!-- Page content Wrapper -->
+
+                </div> <!-- content -->
+
+                <footer class="footer">
+                    © 2020 Weread 
+                </footer>
+
+            </div>
+            <!-- End Right content here -->
+			</div>
+		</div>
+       </div>
+        <!-- END wrapper -->
+
+
+        <!-- jQuery  -->
+        <script src="../assets/js/qs.js"></script>
+        <script src="../assets/js/vue.js"></script>
+        <script src="../assets/js/axios.js"></script>
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/popper.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/modernizr.min.js"></script>
+        <script src="../assets/js/detect.js"></script>
+        <script src="../assets/js/fastclick.js"></script>
+        <script src="../assets/js/jquery.slimscroll.js"></script>
+        <script src="../assets/js/jquery.blockUI.js"></script>
+        <script src="../assets/js/waves.js"></script>
+        <script src="../assets/js/jquery.nicescroll.js"></script>
+        <script src="../assets/js/jquery.scrollTo.min.js"></script>
+
+        <!-- App js -->
+        <script src="../assets/js/app.js"></script>
+		
+		
+		 <script type="text/javascript">
+		 var urls=window.location.href.split("?")[1]
+
+		 var total=0;//总条数
+		 var vm=new Vue({
+				el:'#bookManage',
+				data:{
+	    			total:0,
+	    			pageNum:1,
+	    			pageTotal:0,
+                    pageNo:1,
+		 			name:'',
+	    			list:{},
+	    			bid:'',
+	    			btype:'',
+                    introName:'',
+	    			authName:'',
+                    bintro:'',
+                    length:0,
+                    books:[]
+				},
+				methods:{
+					button:function(){
+						name=this.name,
+						console.log(this.bid);
+						if(!name){
+						 		 alert("请输入小说名");
+						 		 return;
+  					  }else{
+  						axios({
+	    					  url:'../../bookManage.action',
+	    					  method: 'post',
+	    					  responseType: 'text', 
+	    					  params:{
+	    						  op:'findBookByName',
+	    						  bname:this.name
+	    					  }
+	    					}).then(res => {
+	    						list=res.data.findBookByName
+	    						console.log(list)
+	    					  console.log('请求结果：', res);
+	    					})
+	  					  }
+					},
+					add:function(){
+						btype=this.btype,
+	  					  bname=this.bname,
+	  					  authName=this.authName,
+	  					  intro=this.intro
+						if(!btype||!bname||!authName ||!intro){
+						 		 alert("信息未补全,添加失败");
+						 		 return;
+  					  }else{
+  						axios({
+	    					  url:'../../bookManage.action',
+	    					  method: 'post',
+	    					  responseType: 'text', 
+	    					  params:{
+	    						  op:'add',
+	    						  btype: this.btype,
+			  					  bname:this.bname,
+			  					  authName: this.authName,
+			  					  intro:this.intro
+	    					  }
+	    					}).then(res => {
+	    					  console.log('请求结果：', res);
+	    					  alert("添加成功");
+	    					})
+	    					
+  					  }
+					},
+					del:function(){
+						bid=this.bid,
+						console.log(this.bid);
+						if(!bid){
+						 		 alert("删除失败");
+						 		 return;
+  					  }else{
+  						axios({
+	    					  url:'../../bookManage.action',
+	    					  method: 'post',
+	    					  responseType: 'text', 
+	    					  params:{
+	    						  op:'del',
+	    						  bid:this.bid
+	    					  }
+	    					}).then(res => {
+	    					  console.log('请求结果：', res);
+	    					  alert("删除成功");
+	    					})
+	  					  }
+					},
+					showPage:function(num){
+	    				  if(num==1){
+	    					  //首页
+	    					  console.log(this.pageNum);
+	    					  this.pageNum=1;
+	    				  }else if(num==2){
+	    					  //上一页
+	    					  if(this.pageNum>1){
+	    						  this.pageNum=this.pageNum-1;
+	    					  }
+	    				  }else if(num==3){
+	    					  //下一页
+	    					  if(this.pageNum<this.pageTotal){
+	    						  this.pageNum=this.pageNum+1;
+	    					  }
+	    				  }else if(num==4){
+	    					  //末页
+	    					  this.pageNum=this.pageTotal;
+	    				  }
+	    				  axios.get("../../bookManage.action",{
+	    					  params:{op:'findAllBook',pageSize:pageSize,pageNum:this.pageNum}
+	    				  }).then((result)=>{
+	    					  this.members=result.data.members;});
+	    			  },
+	    			  delInfo:function(mno){
+	    				  console.log(mno);
+	    			  },
+                    showIntro:function(b){
+					    console.log(b);
+                        this.bintro=b.intro;
+                        this.introName=b.bname
+                    }
+				},
+				mounted:function(){
+					axios.all([showInfo(),checkLogin(),getLength()])
+					.then(axios.spread((fn1,fn2,fn3)=>{
+                        if (fn2.data.code){
+                            this.user=fn2.data.obj;
+                        }else{
+                            location.href="../login.html";
+                        }
+                        this.pageNo=1;
+                        console.log(fn3.data);
+                        this.books=fn1.data.obj;
+					    console.log(this.books);
+
+						this.length=fn3.data.obj;
+                        this.total=(this.length/7)+1;
+					}));
+				}
+				
+			});
+
+             function getLength(){
+                 return axios.get('../../bookinfo/getLength');
+             }
+             function checkLogin(){
+                 return axios.get('../../admin/checkLogin');
+             }
+			 function showInfo(){
+			    	return axios.get("../../bookinfo/findbyPage",{
+			    		params:{pageSize:7,pageIndex:0}
+			    	});
+			    }
+		</script> 
+    </body>
+</html>

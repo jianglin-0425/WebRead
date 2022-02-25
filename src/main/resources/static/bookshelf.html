@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/biquge.css" />
+		<link rel="stylesheet" href="css/center/index.6b94b.css" />
+		<script type="text/javascript" src="js/jquery-1.10.1.js" ></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/axios.js" ></script>
+		<style>
+			.qdp-border {
+				display: none;
+			}
+
+			.current {
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="personal-header" data-l1="1">
+            <div class="header-wrapper">
+                <div class="header-logo">
+                    <a href="center.html">个人中心</a>
+                </div>
+                <ul class="header-nav">
+                    <li class="header-nav-li">
+                        <a href="center.html" class="header-nav-a " accesskey="1" data-eid="qd_M01">
+                        	<i class="iconfont icon-home"></i>我的首页
+                        </a>
+                    </li>
+                    <li class="header-nav-li" id="headerNav">
+                        <a href="#" class="header-nav-a active" accesskey="2" data-eid="qd_M02">
+                        	<i class="iconfont icon-book"></i>我的书架
+                        </a>
+                    </li>
+                    <li class="header-nav-li">
+                        <a href="message.html" class="header-nav-a " accesskey="3" data-eid="qd_M03">
+                        	<i class="qdp-unread elUnread dn"></i>消息中心
+                        </a>
+                    </li>
+                    <li class="header-nav-li">
+	                    <a href="index.html" class="header-nav-a " accesskey="3" data-eid="qd_M03">
+	                    	<i class="qdp-unread elUnread dn"></i>阅读网首页
+	                    </a>
+                    </li>
+                </ul>
+                <a href="center.html" id="headerLog" class="header-log" data-eid="qd_M06" data-target="headerDropList">
+                   			
+                </a>
+            
+            </div>
+            <ul id="headerDropList" class="header-drop" data-align="3-2" style="position: absolute; left: 1157px; top: 70px;">
+                <li>
+                    <a href="/setting" data-eid="qd_M08">个人设置</a>
+                </li>
+                <li>
+                    <a href="center.html" data-eid="qd_M09">我的主页</a>
+                </li>
+                <li>
+                    <a href="ClientServerCenter.html" target="_blank" data-eid="qd_M10">客服中心</a>
+                </li>
+                <li>
+                    <a href="" id="elLoginOut" data-eid="qd_M11" onclick="LoginOut()">退出</a>
+                </li>
+            </ul>
+        </div>
+		<div id="main" class="qdp-wrapper">
+			<div class="personal-sideBar" data-l1="2">
+				<ul class="sideBar-group">
+					<li class="active" id="read_pre">
+						<a href="#" class="sideBar-list-a" title="最近阅读" data-eid="qd_M185" onclick="showBookCase()" >最近阅读</a>
+					</li>
+				</ul>
+				<ul class="sideBar-group" id="tabView">
+					<li id="elIndex" class="">
+						<a href="#" class="sideBar-list-a" title="默认分组" data-eid="qd_M186" onclick="showrecord()" >我的书架</a>
+					</li>
+				</ul>
+			</div>
+		    <div class="qdp-content " data-l1="3">
+		        
+		        <div class="qdp-border table-x shelf-table shelf-recent 最近阅读  current" data-l3="3">
+		            <div class="table-msg">
+		                <h2 class="shelf-title">最近阅读</h2>最多显示最近阅读的
+		                <strong class="dark ml5 mr5">10</strong>本书
+		            </div>
+		            <div class="table-size ui-loading-animation" style="height: 192px; transition: height 200ms ease 0s;">
+		                <table id="shelfTable" class="ui-table">
+		                    <thead>
+		                    	<tr>
+			                        <th scope="col">书名/阅读章节</th>
+			                        <th scope="col" width="80">阅读时间</th>
+			                        <th scope="col" width="90">作者</th>
+			                        <th scope="col" width="60">操作</th>
+			                        <th scope="col" width="20">&nbsp;</th>
+		                      	</tr>
+		                    </thead>
+		                    <tbody>
+							    
+							    <tr class="qdp-operate-wrapper" v-for="r in record ">
+							         <td class="col1">
+								         <span class="shelf-table-name">
+									         <b>
+									         	<a :href="'type.html?type='+r.btype" target="_blank" class="fen-category">「{{r.btype}}」</a>
+								    	     	<a :href="'book.html?bid='+r.bid" target="_blank" title="LCK的中国外援">{{r.bname}}</a>
+									         </b>
+									         <a :href="'content.html?bid='+r.bid+'&sno='+r.sno" class="shelf-table-chapter blue" target="_blank" title="新书已发《殒星之下》">{{r.sname}}</a>
+								         </span>
+							         	
+							         	<span class="shelf-badge-vip">免费</span>
+							        
+							         </td>
+							        <td class="col2 font12">{{r.rtime}}</td>
+							        <td class="col3">
+							        	<span class="shelf-table-author font12">{{r.authName}}</span>
+							        </td>
+							        <td class="col4">
+							        	<a href="#" @click="deleteRecorde(r.bid)">删除记录</a>
+							    </tr>
+							   
+						    </tbody>
+		                </table>
+		                
+		                <div class="ui-loading" style="top: 0px; display: none;"><i class="ui-loading-icon"></i></div>
+		            </div>
+		        </div>
+		        <div class="qdp-border table-x shelf-default shelf-table 我的书架 " data-l4="3">
+		                <div class="table-msg" data-l3="3">
+		                    <h2 class="shelf-title" id="shelfTitle" data-gid="1">我的书架</h2>共<strong class="dark ml5 mr5" id="elMoTotal">{{bookcase.length}}</strong><span id="shelfAmount">本书籍</span>
+		                </div>
+		                <div class="table-size" data-l3="3">
+		                    <table id="shelfTable" class="ui-table table-checkbox" data-count="2">
+		                        <thead>
+		                        	<tr>
+			                            <th scope="col" style="text-align: center;">类型</th>
+			                            <th scope="col" style="width: 71px;">书名/最近更新章节</th>
+			                            <th scope="col" width="70" style="width: 19px;">更新时间</th>
+			                            <th scope="col" width="90" style="width: 15px;">作者</th>
+			                            <th scope="col" width="60">阅读时间</th>
+			                            <th scope="col" width="20">&nbsp;操作</th>
+		                          	</tr>
+		                        </thead>
+		                        <tbody>
+
+
+		                            <tr v-for="book in bookcase ">
+										<td class="col2 font12" style="text-align: center;">
+											<a :href="'type.html?type='+book.btype" data-eid="qd_M219" target="_blank" class="fen-category">「{{book.btype}}」</a>
+										</td>
+		                                 <td class="col1">
+								         	<span class="shelf-table-name">
+			                                    <b>
+
+			                                        <a :href="'book.html?bid='+book.bid" target="_blank" title="斗破苍穹" data-bid="1209977" data-eid="qd_M198">{{book.bname}}</a>
+			                                    </b>
+			                                    <a :href="'content.html?bid='+book.bid+'&sno='+book.sno" data-eid="qd_M218" data-cid="427202307" class="shelf-table-chapter blue" target="_blank" title="">{{book.sname}}</a>
+			                                </span>
+			                                <span class="shelf-badge-vip">免费</span>
+		                                </td>
+										<td class="col4">
+											<a href="#" target="_blank" title="天蚕土豆" class="shelf-table-author font12" data-eid="qd_M200">{{book.wtime}}</a>
+										</td>
+		                                <td class="col4">
+		                                    <a href="#" target="_blank" title="天蚕土豆" class="shelf-table-author font12" data-eid="qd_M200">{{book.authName}}</a>
+		                                </td>
+										<td>{{book.rtime}}</td>
+										<td class="col6 shlef-menu">
+		                                	<a href="#" class="blue iconfont icon-menu" data-target="forList0" data-eid="qd_M203" @click="deleteBookCase(book.bid)">删除</a>
+		                                </td>
+
+									</tr>
+		                          
+		                        </tbody>
+		                    </table>
+                   			
+		                    <div class="style" style="height:51px;">
+		                        <div id="tableFixedFoot" class="shelf-foot">
+		                            <div class="shelf-foot-wrapper">
+		                                <table class="ui-table table-checkbox">
+		                                    <thead>
+		                                      <tr>
+		                                        <th scope="col" style="line-height:50px;">
+		                                        	<input class="chkBookNameAll2" type="checkbox" id="chkBookNameAll2" name="bookname" value="all">
+		                                        </th>
+		                                      </tr>
+		                                    </thead>
+		                                </table>
+		                            </div>
+		                        </div>
+		                    </div>
+               		 </div>
+           		 </div>
+    		</div>          
+            <div class="go-top dn">
+                <div class="go-top-wrap">
+                    <a href="#" class="icon-go-top bTips" title="返回顶部"><i class="iconfont icon-backtop"></i></a>
+                </div>
+            </div>
+            
+            <dialog class="ui-dialog-container ui-dialog-move" style="display: none;">
+				<div class="ui-dialog" tabindex="-1" style="width: auto;">
+					<div class="ui-dialog-body">
+					    <form class="table-x shelf-dialog-move" action="/ajax/BookShelf/Move" method="get" style="width:440px;" novalidate="novalidate">
+					        <div class="table-size ui-loading-animation" style="height: 122px; transition: height 200ms ease 0s;">
+					             <div  id="add_group" class="dialog-move">
+					                <label><b>书籍信息</b></label>
+					            </div>
+					            <div class="dialog-move-table">
+					                <table class="ui-table">
+					                    <tbody class="bg-white">                
+					                <tr>
+					                    <td class="col1">书名:</td>
+					                    <td class="col2" width="100" align="right">斗破苍穹</td>
+					                </tr>
+					                
+					                <tr>
+					                    <td class="col1">类型</td>
+					                    <td class="col2" width="100" align="right">玄幻</td>
+					                </tr>
+					                <tr>
+					                    <td class="col1">作者</td>
+					                    <td class="col2" width="100" align="right">天蚕土豆</td>
+					                </tr>
+					            </tbody>
+					                </table>
+					            </div>
+					         </div>
+					    </form>
+			    	</div>
+				    <div class="ui-dialog-footer" style="margin-top: 71px;">
+				    	<a href="javascript:;" class="ui-button">确定</a>
+				    	<a href="javascript:;"id="ui_dialog_cancle"  class="ui-button ui-button-default ">取消</a>
+				    </div>
+			    </div>
+				
+			</dialog>	
+            
+        </div>	
+		
+		<div class="footer"> 
+		    <div class="footer_link"></div>
+		    <div class="footer_cont">
+				<p>Copyright © 2015-2022 <a href="http://www.xbiquge.la/">新笔趣阁</a> All Rights Reserved.</p>
+				<p>沪ICP备14048333号</p>
+			</div>
+		</div>
+	
+		<script type="text/javascript">
+
+			function showrecord(){
+				$(".personal-sideBar ul li").removeClass("active");
+				$("#elIndex").addClass("active");
+				$(".最近阅读").removeClass('current');
+				$(".我的书架").addClass("current");
+			}
+			function showBookCase(){
+				$(".personal-sideBar ul li").removeClass("active");
+				$("#read_pre").addClass("active");
+				$(".最近阅读").addClass("current");
+				$(".我的书架").removeClass('current');
+			}
+			//全选
+			var fxk=$("tr input[class!=chkBookNameAll2]");
+			$(".chkBookNameAll2").click(function() {				//首先给id为全选的元素增加单击事件
+		         if(this.checked){						//判断当前按钮是否被选中
+		            for(var i=0;i<fxk.length;i++){			//判断之后要循环改变所有复选框的值
+		                  fxk[i].checked=true;					//结果为真（选中），则复选框为true;
+		                }
+		         }else{
+		            for(var i=0;i<fxk.length;i++){
+		                  fxk[i].checked=false;					//结果为假（未选中），则复选框为false;
+		            }
+		         }
+		     });
+			//全选与反选功能结束
+
+			for(var i=0;i<fxk.length;i++){				//因为fxk是全局变量，所以这里也可以直接调用
+		       $("tr input[class!=chkBookNameAll2]").click(function() {	//首先，循环给所有复选框增加单击事件
+		           var flag=true;
+		       	  for(var i=0;i<fxk.length;i++){	
+		       	  	flag&=fxk[i].checked;
+		       	  }
+		       	  if(flag){	//判断每一个复选框是否被选中
+		              chkBookNameAll2.checked=true;					//如果被选中，则全选框为true
+		          }else{
+		              chkBookNameAll2.checked=false;					//如果有一个没有被选中，则全选框为false
+		          }
+		       });
+		    }
+			
+			
+			
+			$("#elDelete").click(function(){
+				if(hasChecked()){
+					$(".ui-dialog-move").css("display","block");	
+				}
+				else{
+					alert("未选择任何书籍");
+				}
+				
+			});
+			
+			$("#close_dialog").click(function(){
+				$(".ui-dialog-container").css("display","none");
+			});
+			$("#ui_dialog_cancle").click(function(){
+				$(".ui-dialog-container").css("display","none");
+			});
+			$("#close_dialog_add").click(function(){
+				$(".ui-dialog-add").css("display","none");
+			});
+			function hasChecked(){
+				var flag=false;
+				for(var i=0;i<fxk.length;i++){	
+					flag|=fxk[i].checked;
+				}
+				return flag;
+			}
+			var trs=$("tbody[class='bg-white'] tr");
+			trs.click(function(){
+				for (var i=0;i<trs.length;i++) {
+					if(trs[i]==this){
+						$(this).css("color","red");
+					}else{
+						$(trs[i]).css("color","#3e3d43");
+					}
+				}
+				console.log("dasda");
+			});
+			$("#headerLog").hover(function (e) {
+                $("[id$='headerDropList']").show();
+            }, function () {
+                $("[id$='headerDropList']").hide();
+	        });
+			$("#headerDropList").hover(function (e) {
+	                $("[id$='headerDropList']").show();
+	            }, function () {
+	                $("[id$='headerDropList']").hide();
+	        });
+			
+			var vm=new Vue({
+				el:'#main',
+				data:{
+					bookcase:{},
+					user:{},
+					record:{}
+				},
+				methods:{
+					outLogin:function(){
+						axios({
+							url:'user/OutLogin',
+							method:'post',
+							params:{}
+						}).then(result=>{
+							if(result.data==1){
+								location.href="index.html";
+							}else{
+								alert('用户登录失败');
+							}
+						});
+					},
+					deleteBookCase:function(bid){
+						console.log(bid);
+						axios({
+							url:'bookCase/deleteCase',
+							method:'post',
+							params:{bid:bid}
+						}).then(result=>{
+							if(result.code.data==1){
+								location.reload();	
+							}else{
+								alert('删除失败');
+							}
+						});
+					},
+					deleteRecorde:function(bid){
+						console.log(bid);
+						axios({
+							url:'record/deleteRecord',
+							method:'post',
+							params:{bid:bid}
+						}).then(result=>{
+
+							if(result.data.code==1){
+								location.reload();	
+							}else{
+								alert('删除失败');
+							}
+						});
+					}
+				},
+				mounted:function(){
+					axios.all([CheckLogin(),getMessage()])
+					.then(axios.spread((fn1,fn2)=>{
+						console.log(fn1.data)
+						console.log(fn2.data);
+						this.user=fn1.data.obj;
+						if(this.user==null)
+						{
+							window.location.href="login.html";	
+						}
+						$("#headerLog").html("书友&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;"+this.user.uname+"&nbsp;]&nbsp;&nbsp;");
+						this.bookcase=fn2.data.obj.bookcase;
+						this.record=fn2.data.obj.record;
+						console.log(fn1.data);
+					}));
+				}
+				
+			});
+			function CheckLogin(){
+				return axios({
+					url:'user/checkLogin',
+					method:'get',
+					params:{}
+				});
+			}
+			function getMessage(){
+				
+				return axios.get('bookCase/findBookCase');
+			}
+			function LoginOut(){
+				axios({
+					url:'user/OutLogin',
+					method:'post',
+					params:{}
+				}).then(result=>{
+					if(result.data==1){
+						location.href="index.html";
+					}else{
+						alert('用户退出失败');
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jl.repository.IVoteDAO">
+
+    <insert id="add" parameterType="com.jl.bean.Vote">
+        insert into vote values(null,#{bid},1)
+    </insert>
+
+    <select id="find" parameterType="com.jl.bean.Vote" resultType="com.jl.bean.Vote">
+        select
+            vid,bid,count
+        from
+            vote
+        where 1=1
+        <if test="vid!=null"> and vid=#{vid} </if>
+        <if test="bid!=null"> and bid=#{bid} </if>
+    </select>
+
+
+
+    <update id="update" parameterType="com.jl.bean.Vote">
+        update
+            vote
+        set
+            count=count+1
+        where 1=1
+            <if test="vid!=null"> and vid=#{vid} </if>
+            <if test="bid!=null"> and bid=#{bid} </if>
+    </update>
+
+
+</mapper>

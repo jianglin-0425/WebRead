@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/biquge.css" />
+			<script type="text/javascript" src="js/jquery-1.10.1.js" ></script>
+		<script type="text/javascript" src="js/push.js" ></script>
+		<script type="text/javascript" src="js/bqg.js" ></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
+			<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/qs.js" ></script>
+		<script type="text/javascript" src="js/axios.js" ></script>
+	</head>
+	<body>
+	<div id="__main">
+		<div id="wrapper">
+			<div class="ywtop">
+				<div class="ywtop_con">
+					<div class="ywtop_sethome">
+						<a href="#">将笔趣阁快捷方式保存到桌面</a>
+					</div>
+					<div class="ywtop_addfavorite">
+						<a href="#" onclick="javascript:window.external.addFavorite('http://www.xbiquge.la','新笔趣阁_书友最值得收藏的网络小说阅读网')">收藏新笔趣阁</a>
+					</div>
+					<div class="nri">
+						<form name="frmlogin" id="frmlogin" method="post" class="show" >
+							<div class="ccc"v-if="user==null">
+								<div class="txtt" >
+									<a href="login.html">登录</a>
+								</div>
+								<div class="txtt"><a href="register.html">用户注册</a></div>
+							</div>
+						</form>
+						<div v-if="user!=null ">
+							Hi,&nbsp;&nbsp;{{user.uname}}&nbsp;&nbsp;
+							<a href="center.html" target="_top">个人中心</a>
+							|
+							<a  @click="outLogin()">退出登录</a>
+							&nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="header">
+				<div class="header_logo">
+					<a href="index.html" style="background-image: url(images/logo.png);">阅览阁</a>
+				</div>
+				<div class="header_search">
+					<form name="form" id="sform">
+						<input type="text" value="可搜书名和作者，请您少字也别输错字。" name="searchkey" class="search" id="wd" baidusug="2" autocomplete="off">			
+						<button id="sss"> 搜 索 </button>
+					</form>
+					
+				</div>
+				<div class="userpanel">
+					&nbsp;
+					<font color="red">留言: </font>
+					<a rel="nofollow" href="feedBack.html?title=求书加书">
+						<font color="red">求书加书</font>
+					</a>
+					,
+					<a rel="nofollow" href="feedBack.html?title=意见反馈">意见反馈</a>
+					&nbsp;
+					<a rel="nofollow" href="ClientServerCenter.html">联系我们</a>
+					&nbsp;
+					&nbsp;
+					<a rel="nofollow" href="feedBack.html?title=书籍反馈">书籍反馈</a>
+				</div>
+			</div>
+			<div class="nav">
+				<ul>
+					<li><a href="index.html">首页</a></li>
+					<li><a href="bookshelf.html">我的书架</a></li>
+					<li><a href="type.html?type=玄幻">玄幻小说</a></li>
+					<li><a href="type.html?type=修真">修真小说</a></li>
+					<li><a href="type.html?type=都市">都市小说</a></li>
+					<li><a href="type.html?type=穿越">穿越小说</a></li>
+					<li><a href="type.html?type=网游">网游小说</a></li>
+					<li><a href="type.html?type=科幻">科幻小说</a></li>
+					<li><a href="rank.html">排行榜单</a></li>
+				</ul>
+			</div>
+			<div class="box_con" v-for="m in main">
+	            <div class="con_top">
+	                <div id="bdshare" class="bdshare_b" style="line-height: 12px;">
+	                	<img src="http://bdimg.share.baidu.com/static/images/type-button-7.jpg">
+	                	<a class="shareCount" title="累计分享0次">0</a>
+	                </div>
+	                <a href="/">新笔趣阁</a> 
+	                &gt; 
+	                <a :href="'type.html#btype='+m.btype">{{m.btype}}小说</a>  
+	                &gt; {{m.bname}}最新章节目录
+	            </div>
+	            <div id="maininfo">
+	                <div id="info">
+	                    <h1>{{m.bname}}</h1>
+	                    <p>{{m.authName}}</p>
+	                    <p>动&nbsp;&nbsp;&nbsp;&nbsp;作：
+	                    	<a href="javascript:;" @click="addBookCase()">加入书架</a>, 
+	                    	<a href="javascript:;" @click="vote()">投推荐票</a>,  
+	                    	<a href="#footer">直达底部</a>
+	                    </p>
+	                    <p>最后更新：{{m.wtime}}</p>
+	                    <p>最新章节：
+	                    	<a :href="'content.html?bid='+m.bid+'&sno='+m.sno" >{{m.sname}}</a>
+	                    </p>
+	                </div>
+	                <div id="intro">
+	                    <p>
+	                    	
+	 
+	                    </p>
+	                                        
+	                    <p>   {{m.intro}}</p>
+	                </div>
+	            </div>
+	            <div id="sidebar">
+	                <div id="fmimg">
+	                	<img :src="m.img" width="120" height="150">
+	                	<span class="b"></span>
+	                </div>
+	            </div> 
+	            <div id="listtj">
+	            	&nbsp;推荐阅读：
+	            	<a href="http://www.xbiquge.la/9/9785/" target="_blank">剑卒过河</a>、
+	            	<a href="http://www.xbiquge.la/0/10/" target="_blank">武炼巅峰</a>、
+	            	<a href="http://www.xbiquge.la/26/26874/" target="_blank">沧元图</a>、
+	            	<a href="http://www.xbiquge.la/15/15409/" target="_blank">牧神记</a>、
+	            	<a href="http://www.xbiquge.la/26/26511/" target="_blank">剑徒之路</a>、
+	            	<a href="http://www.xbiquge.la/2/2029/" target="_blank">极品透视</a>、
+	            	<a href="http://www.xbiquge.la/1/1988/" target="_blank">龙城</a>、
+	            	<a href="http://www.xbiquge.la/13/13959/" target="_blank">圣墟</a>、
+	            	<a href="http://www.xbiquge.la/32/32626/" target="_blank">叶辰孙怡夏若雪</a>、
+	            	<a href="http://www.xbiquge.la/0/951/" target="_blank">伏天氏</a>、
+	            	<a href="http://www.xbiquge.la/30/30581/" target="_blank">顶级神豪</a>、
+	            	<a href="http://www.xbiquge.la/20/20948/" target="_blank">最佳女婿</a>、
+	            	<a href="http://www.xbiquge.la/0/656/" target="_blank">莽荒纪</a>、
+	            	<a href="http://www.xbiquge.la/14/14930/" target="_blank">元尊</a>、
+	            	<a href="http://www.xbiquge.la/7/7552/" target="_blank">万古神帝</a>
+	            </div>
+	        </div>
+			<div class="dahengfu" style="margin-bottom:0;"></div>
+			<div class="box_con">
+            	<div id="list" >
+		            <dl>  
+		          
+		                <dd v-for="l in list ">
+		                <a :href="'content.html?bid='+l.bid+'&sno='+l.sno"  >{{l.sname}}</a>
+		              
+		                </dd>
+		            </dl>
+            	</div>
+        	</div>		
+			<div class="dahengfu"></div>
+			<div id="footer" name="footer">
+	            <div class="footer_link">&nbsp;新书推荐：
+	            	<a href="http://www.qtshu.com/jiushuyouhu/" target="_blank">三寸人间</a>、
+	            	<a href="http://www.xbiquge.la/72/72278/" target="_blank">破虚狂雷</a>、
+	            	<a href="http://www.xbiquge.la/72/72277/" target="_blank">修仙界最后的单纯</a>、
+	            	<a href="http://www.xbiquge.la/72/72276/" target="_blank">妻妾一家欢</a>、
+	            	<a href="http://www.xbiquge.la/72/72275/" target="_blank">抱歉，女配变心了</a>、
+	            	<a href="http://www.xbiquge.la/72/72274/" target="_blank">随身系统：神医小农女</a>
+	            </div>
+	            <div class="footer_cont">
+	                <p>《三寸人间》情节跌宕起伏、扣人心弦1，是一本情节与文笔俱佳的修真小说，新笔趣阁转载收集三寸人间最新章节。</p>
+	                <p>本站所有小说为转载作品，所有章节均由网友上传，转载至本站只是为了宣传本书让更多读者欣赏。</p>
+					<p>Copyright © 2015-2022 
+						<a href="http://www.xbiquge.la/">新笔趣阁</a>
+						 All Rights Reserved.
+					</p>
+					<p>沪ICP备14048333号</p>
+	            </div>
+	        </div>
+		</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+	var urls=window.location.href.split("?")[1].split("&");
+	var bid=urls[0].split("=")[1];
+		var vm=new Vue({
+			el:'#__main',
+			data:{
+				list:{},
+				main:{},
+				user:{},
+				data:{}
+			},
+			methods:{
+				save:function(){
+					var intro=$("#text_intro").val()
+					var sex='男'
+					var i=$('input:radio:checked').val();
+					if(i==1){
+						sex='女'
+					}
+					console.log(i);
+
+					$.ajaxFileUpload({
+						url:"userFileUpload",
+						secureuri:false,
+						fileElementId:'img',
+						dataType:'json',
+						data:{
+							uintro:intro,sex:sex
+						},
+						success:function(data){
+							console.log(data);
+							alert("保存成功");
+							$(".info-box").css("display","none");
+							$("#q-content").css("display","block");
+						}
+
+					});
+
+				},
+				outLogin:function(){
+					axios({
+						url:'user/OutLogin',
+						method:'post',
+						params:{}
+					}).then(result=>{
+						if(result.data.code==1){
+							location.reload();
+						}else{
+							alert('用户退出失败');
+						}
+					});
+				},
+				vote:function(){
+					axios({
+						url:'vote/vote',
+						method:'post',
+						params:{bid:bid}
+					}).then(result=>{
+						console.log(result);
+					});
+				},
+				addBookCase:function(){
+					axios({
+						url:'bookCase/add',
+						method:'post',
+						params:{bid:bid,sno:0}
+					}).then(result=>{
+						console.log(result);
+						if(result>0)
+							alert("加入成功");
+					});
+				}
+			},
+			mounted:function(){
+				axios.all([CheckLogin(),getContent()])
+				.then(axios.spread((fn1,fn2)=>{
+					/*this.hot=fn1.data;
+					this.main=fn2.data;
+					console.log(this.hot);
+					console.log(this.main);
+					*/
+				
+					//this.list=fn2.data;
+
+					this.main=fn2.data.obj.book;
+					this.list=fn2.data.obj.chapter;
+					console.log(fn2.data);
+					
+					this.user=fn1.data.obj;
+
+				}));
+			}
+			
+		});
+		function CheckLogin(){
+			return axios({
+				url:'user/checkLogin',
+				method:'get',
+				params:{}
+			});
+		}
+		function getContent(){
+			console.log(bid.replace("#",""));
+			return axios({
+				url:'bookVo/findChapter',
+				method:'get',
+				params:{bid:bid.replace("#","")}});
+			//axios.get('bookVo/findChapter&bid='+bid);
+		}
+		</script>
+</html>
+

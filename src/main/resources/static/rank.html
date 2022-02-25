@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/biquge.css" />
+		<script type="text/javascript" src="js/jquery-1.10.1.js" ></script>
+		<script type="text/javascript" src="js/push.js" ></script>
+		<script type="text/javascript" src="js/bqg.js" ></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
+		<script type="text/javascript" src="js/vue.js" ></script>
+		<script type="text/javascript" src="js/qs.js" ></script>
+		<script type="text/javascript" src="js/axios.js" ></script>
+		<style type="text/css">
+						<!--
+						ol li,ul li{list-style:none;}
+						#tops_nav{margin-top:15px;height:30px;border:1px solid #9AE6C5;background-color:#E3F4E7;}
+						#tops_nav ol{margin:0 auto;width:960px;line-height:30px;}
+						#tops_nav ol li{float:left;padding-top:0!important;padding-top:4px;width:320px;text-align:center;}
+						#tops_nav ol li input{height:22px;line-height:22px;width:100px;background-color:#DDF2FF;border:1px solid #83B0E1;}
+						
+						.box{float:left;padding-top:25px;margin:25px 4px auto 4px;width:234px;height:549px;border-style:solid;border-width:1px;position:relative;}
+						.box h3{top:-13px;left:37px;width:161px;height:24px;line-height:24px;border-style:solid;border-width:1px;font-size:12px;text-align:center;position:absolute;}
+						.box ul{width:96%;}
+						.box ul li{padding-left:10px;height:24px;line-height:25px;border-bottom:1px solid #e4e4e4;font-size:12px;text-align:left;position:relative;}
+						.box ul li.more{border-bottom:0;}
+						.box ul li.ltitle span,.box ul li.ltitle span a{color:#555;}
+						.box ul li.ltitle span a,.box ul li.ltitle span a:hover{color:#555;text-decoration:underline;}
+						.box ul li a{margin-left:10px;line-height:25px;color:#3366BB;}
+						.box ul li a:hover{color:#F60;text-decoration:underline;}
+						.box ul li span{right:10px;top:0px;position:absolute;}
+						
+						.b1,.b1 h3{border-color:#F9CDDE;}
+						.b1 h3{background-color:#FCDEEA;}
+						.b2,.b2 h3{border-color:#B0DBEC;}
+						.b2 h3{background-color:#D6ECF7;}
+						.b3,.b3 h3{border-color:#EFEAAA;}
+						.b3 h3{background-color:#FAF1D4;}
+						.b4,.b4 h3{border-color:#D5E6B9;}
+						.b4 h3{background-color:#E5F8CB;}
+						-->
+			</style>
+			
+	</head>
+	<body>
+	<div id="__main">
+		<div id="wrapper">
+				<div class="ywtop">
+					<div class="ywtop_con">
+						<div class="nri">
+							<form name="frmlogin" id="frmlogin" method="post" class="show" >
+							<div class="ccc" v-if="user==null">
+								<div class="txtt" >
+									<a href="login.html">登录</a>
+								</div>
+								<div class="txtt"><a href="register.html">用户注册</a></div>
+							</div>
+						</form>
+						<div v-if="user!=null">
+							Hi,&nbsp;&nbsp;{{user.uName}}&nbsp;&nbsp;
+							<a href="center.html" target="_top">个人中心</a>
+							|
+							<a href="#" @click="outLogin()">退出登录</a>
+							&nbsp;
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="header">
+					<div class="header_logo">
+						<a href="index.html" style="background-image: url(images/logo.png);">阅览阁</a>
+					</div>
+					<div class="header_search">
+						<!-- <form name="form" id="sform">
+							<input type="text" value="可搜书名和作者，请您少字也别输错字。" name="searchkey" class="search" id="wd" baidusug="2" autocomplete="off">			
+							<button id="sss"> 搜 索 </button>
+						</form> -->
+						
+					</div>
+					<div class="userpanel">
+						&nbsp;
+						<font color="red">留言: </font>
+						<a rel="nofollow" href="feedBack.html?title=求书加书">
+							<font color="red">求书加书</font>
+						</a>
+						,
+						<a rel="nofollow" href="feedBack.html?title=意见反馈">意见反馈</a>
+						&nbsp;
+						<a rel="nofollow" href="ClientServerCenter.html">联系我们</a>
+						&nbsp;
+						&nbsp;
+						<a rel="nofollow" href="feedBack.html?title=书籍反馈">书籍反馈</a>
+					</div>
+				</div>
+				<div class="nav">
+					<ul>
+						<li><a href="index.html">首页</a></li>
+						<li><a href="bookshelf.html">我的书架</a></li>
+						<li><a href="type.html?type=玄幻">玄幻小说</a></li>
+						<li><a href="type.html?type=修真">修真小说</a></li>
+						<li><a href="type.html?type=都市">都市小说</a></li>
+						<li><a href="type.html?type=穿越">穿越小说</a></li>
+						<li><a href="type.html?type=网游">网游小说</a></li>
+						<li><a href="type.html?type=科幻">科幻小说</a></li>
+						<li><a href="rank.html">排行榜单</a></li>
+					</ul>
+				</div>
+				<div id="main">
+				        <div class="box b1">
+				            <h3>玄幻·奇幻小说推荐排行榜</h3>
+				            <ul>
+				                
+								<li v-for="(item, index) in qihuan ">{{index+1}}<a :href="'book.html?bid='+item.bid">{{item.bname}}</a></li>
+				
+				            </ul>
+				        </div>
+				
+				        <div class="box b2">
+				            <h3>修真·仙侠小说推荐排行榜</h3>
+				            <ul>
+				                
+				                
+								<li v-for="(item, index) in wuxia ">{{index+1}}<a :href="'book.html?bid='+item.bid">{{item.bname}}</a></li>
+								 
+				            </ul>
+				        </div>
+				
+				        <div class="box b3">
+				            <h3>都市·青春小说推荐排行榜</h3>
+				            <ul>
+					
+								<li v-for="(item, index) in yanqing ">{{index+1}}<a :href="'book.html?bid='+item.bid">{{item.bname}}</a></li>
+				
+				            </ul>
+				        </div>
+				
+				        <div class="box b4">
+				            <h3>历史·穿越小说推荐排行榜</h3>
+				            <ul>
+				             
+								<li v-for="(item, index) in history ">{{index+1}}<a :href="'book.html?bid='+item.bid">{{item.bname}}</a></li>
+				
+				            </ul>
+				        </div>
+				
+				        <div class="box b1">
+				            <h3>网游·竞技小说推荐排行榜</h3>
+				            <ul>
+				                
+								<li v-for="(item, index) in game ">{{index+1}}<a :href="'book.html?bid='+item.bid">{{item.bname}}</a></li>
+								
+				
+				            </ul>
+				        </div>
+				
+				        <div class="box b2">
+				            <h3>科幻·灵异小说推荐排行榜</h3>
+				            <ul>
+				                
+								<li v-for="(item, index) in yiling ">{{index+1}}<a :href="'book.html?bid='+item.bid">{{item.bname}}</a></li>
+							
+				
+				            </ul>
+				          </div>
+				
+				        <div class="box b3">
+				            <h3>全本小说推荐排行榜</h3>
+				            <ul>
+				                
+								<li v-for="(item, i) in all1 ">{{i}}<a :href="'book.html?bid='+item.bid">{{item.bname}}</a></li>
+								 
+				            </ul>
+				          </div>
+				
+				        <div class="box b4">
+				            <h3>全部小说推荐排行榜</h3>
+				            <ul>
+				                
+								<li v-for="(item, j) in all2 ">{{j}}<a :href="'book.html?bid='+item.bid">{{item.bname}}</a></li>
+								 
+				            </ul>
+				        </div>
+				
+				
+				    </div>
+				    
+			
+			
+			</div>
+				<div class="dahengfu" style="margin-bottom:0;"></div>
+			</div>
+			<div class="dahengfu"></div>
+			<div class="footer"> 
+			    <div class="footer_link"></div>
+			    <div class="footer_cont">
+					<p>Copyright © 2015-2022 <a href="http://www.xbiquge.la/">新笔趣阁</a> All Rights Reserved.</p>
+					<p>沪ICP备14048333号</p>
+				  </div>
+			</div>
+		</div>	
+		<script type="text/javascript">
+			var vm=new Vue({
+				el:'#__main',
+				data:{
+					types:{},
+					history:{},
+					qihuan:{},
+					yiling:{},
+					wuxia:{},
+					game:{},
+					yanqing:{},
+					user:{},
+					all1:{},
+					all2:{}
+				},
+				methods:{
+
+				},
+				mounted:function(){
+					axios.all([findInfo(),CheckLogin()])
+					.then(axios.spread((fn1,fn2)=>{
+						console.log(fn1.data);
+						this.types=fn1.data.obj.type[0];
+						for(var i=0;i<=5;i++){
+							if(this.types[i][0].btype=='历史'){
+								this.history=this.types[i]
+							}
+							if(this.types[i][0].btype=='奇幻'){
+								this.qihuan=this.types[i]
+							}
+							if(this.types[i][0].btype=='异灵'){
+								this.yiling=this.types[i]
+							}
+							if(this.types[i][0].btype=='武侠'){
+								this.wuxia=this.types[i]
+							}
+							if(this.types[i][0].btype=='游戏'){
+								this.game=this.types[i]
+							}
+							if(this.types[i][0].btype=='言情'){
+								this.yanqing=this.types[i]
+							}
+						}
+						for(var i=0;i<20;i++){
+							this.all1[i+1]=fn1.data.obj.all[i];
+						}
+						for(var i=20;i<40;i++){
+							this.all2[i-19]=fn1.data.obj.all[i];
+						}
+						this.user=fn2.data.obj.user
+					
+					}));
+				}
+				
+			});
+			function findInfo(){
+				//return axios.get('book.action?op=rank&count=20');
+				return axios({
+					url:'bookinfo/rank',
+					method:'get',
+					params:{count:20}
+				});
+			
+			}
+
+			function CheckLogin(){
+				return axios({
+					url:'user/checkLogin',
+					method:'get',
+					params:{}
+				});
+			}
+		</script>
+
+	</body>
+</html>
